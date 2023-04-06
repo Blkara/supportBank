@@ -1,20 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.tfg.supportbank.vistas;
 
-/**
- *
- * @author Kara
- */
+import com.tfg.supportbank.connection.sql.ConnectionSqlBdPfgBanco;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+
+
 public class MenuCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuCliente
-     */
+    ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
+    Connection conexionSql = sqlConnection.conectar();
+
     public MenuCliente() {
         initComponents();
+        probarConexionSql();
+    }
+    
+    public void probarConexionSql(){
+            
+        if (null == conexionSql){
+            JOptionPane.showMessageDialog(null,"No se ha realizado la conexion a la bbdd sql");
+        } else {
+            JOptionPane.showMessageDialog(null,"Conexion a la bbdd sql OK");
+        }
     }
 
     /**
@@ -28,10 +36,10 @@ public class MenuCliente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         cliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnVerCliente = new javax.swing.JButton();
+        btnCrearCliente = new javax.swing.JButton();
+        btnModificarCliente = new javax.swing.JButton();
+        btnEliminarCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,19 +51,24 @@ public class MenuCliente extends javax.swing.JFrame {
         cliente.setText("CLIENTE");
         cliente.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
-        jButton1.setText("VER");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnVerCliente.setText("VER");
+        btnVerCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnVerCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerClienteActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CREAR");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnCrearCliente.setText("CREAR");
+        btnCrearCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
-        jButton3.setText("MODIFICAR");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnModificarCliente.setText("MODIFICAR");
+        btnModificarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
-        jButton4.setText("ELIMINAR");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnEliminarCliente.setText("ELIMINAR");
+        btnEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kara_\\Desktop\\cliente.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kara_\\Desktop\\cliente0.png")); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -63,19 +76,20 @@ public class MenuCliente extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, Short.MAX_VALUE)))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,15 +99,15 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnVerCliente)
                         .addGap(42, 42, 42)
-                        .addComponent(jButton2)
+                        .addComponent(btnCrearCliente)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton3)
+                        .addComponent(btnModificarCliente)
                         .addGap(41, 41, 41)
-                        .addComponent(jButton4))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                        .addComponent(btnEliminarCliente))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,6 +123,12 @@ public class MenuCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClienteActionPerformed
+        // TODO add your handling code here:
+        VerCliente ventanaVerCliente = new VerCliente();
+        ventanaVerCliente.setVisible(true);
+    }//GEN-LAST:event_btnVerClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,11 +166,11 @@ public class MenuCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrearCliente;
+    private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JButton btnModificarCliente;
+    private javax.swing.JButton btnVerCliente;
     private javax.swing.JTextField cliente;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
