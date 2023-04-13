@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 
 public class MenuCliente extends javax.swing.JFrame {
 
-    ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
-    Connection conexionSql = sqlConnection.conectar();
+    //ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
+    //Connection conexionSql = sqlConnection.conectar();
 
     public MenuCliente() {
         initComponents();
@@ -17,12 +17,12 @@ public class MenuCliente extends javax.swing.JFrame {
     }
     
     public void probarConexionSql(){
-            
-        if (null == conexionSql){
+         
+       /* if (null == conexionSql){
             JOptionPane.showMessageDialog(null,"No se ha realizado la conexion a la bbdd sql");
         } else {
             JOptionPane.showMessageDialog(null,"Conexion a la bbdd sql OK");
-        }
+        }*/
     }
 
     /**
@@ -126,7 +126,7 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnVerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClienteActionPerformed
         // TODO add your handling code here:
-        VerCliente ventanaVerCliente = new VerCliente();
+        InicioVerClientes ventanaVerCliente = new InicioVerClientes();
         ventanaVerCliente.setVisible(true);
     }//GEN-LAST:event_btnVerClienteActionPerformed
 
