@@ -42,17 +42,17 @@ public class MenuCliente extends javax.swing.JFrame {
         btnEliminarCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
         cliente.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cliente.setText("CLIENTE");
-        cliente.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        cliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnVerCliente.setText("VER");
-        btnVerCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnVerCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVerCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerClienteActionPerformed(evt);
@@ -60,13 +60,23 @@ public class MenuCliente extends javax.swing.JFrame {
         });
 
         btnCrearCliente.setText("CREAR");
-        btnCrearCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnCrearCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearClienteActionPerformed(evt);
+            }
+        });
 
         btnModificarCliente.setText("MODIFICAR");
-        btnModificarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnModificarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarClienteActionPerformed(evt);
+            }
+        });
 
         btnEliminarCliente.setText("ELIMINAR");
-        btnEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kara_\\Desktop\\cliente0.png")); // NOI18N
         jLabel1.setText("jLabel1");
@@ -83,7 +93,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, Short.MAX_VALUE)
                             .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -126,9 +136,18 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void btnVerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClienteActionPerformed
         // TODO add your handling code here:
-        InicioVerClientes ventanaVerCliente = new InicioVerClientes();
-        ventanaVerCliente.setVisible(true);
+        
     }//GEN-LAST:event_btnVerClienteActionPerformed
+
+    private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
+        CrearCliente ventanaCrearCliente = new CrearCliente();
+        ventanaCrearCliente.setVisible(true);
+    }//GEN-LAST:event_btnCrearClienteActionPerformed
+
+    private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
+        ModificarCliente ventanaModificarCliente = new ModificarCliente();
+        ventanaModificarCliente.setVisible(true);
+    }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     /**
      * @param args the command line arguments

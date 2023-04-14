@@ -32,7 +32,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 153));
 
@@ -42,11 +42,11 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("ELIMINAR");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("< Regresar");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,7 +73,7 @@ public class ModificarCliente extends javax.swing.JFrame {
                 .addGap(253, 253, 253)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(modificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()

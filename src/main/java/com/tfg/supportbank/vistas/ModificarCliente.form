@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -70,7 +70,7 @@
                   <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel1" max="32767" attributes="0"/>
-                      <Component id="modificar" pref="31" max="32767" attributes="0"/>
+                      <Component id="modificar" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="134" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">

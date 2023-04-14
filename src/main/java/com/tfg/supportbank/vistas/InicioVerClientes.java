@@ -21,7 +21,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
      */
     public InicioVerClientes() {
         initComponents();
-        probarConexionSql();
+        //probarConexionSql();
         mostrarClientes();
     }
 
@@ -63,6 +63,11 @@ public class InicioVerClientes extends javax.swing.JFrame {
 
         btnMenuClientes.setText("VER CLINTES");
         btnMenuClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelIniVerClienteLayout = new javax.swing.GroupLayout(panelIniVerCliente);
         panelIniVerCliente.setLayout(panelIniVerClienteLayout);
@@ -105,6 +110,11 @@ public class InicioVerClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuClientesActionPerformed
+        MenuCliente ventanaMenuCliente = new MenuCliente();
+        ventanaMenuCliente.setVisible(true);
+    }//GEN-LAST:event_btnMenuClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +169,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
     
     private void setRowsDatos(String[] datos, DefaultTableModel tClientes) {
         ClienteDao clienteDao = new ClienteDao();
-        List<ClienteDo> clientes = clienteDao.buscarClientesMatriz();
+        List<ClienteDo> clientes = clienteDao.findAllClientes();
         
         for (ClienteDo cliente: clientes){
             datos[0] = cliente.getNombre();
@@ -187,7 +197,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
   //  private String[][] obtenerMatriz() {
   
         //ClienteDao clienteDao = new ClienteDao();
-        //ArrayList listaClientes = clienteDao.buscarClientesMatriz();
+        //ArrayList listaClientes = clienteDao.findAllClientes();
 
         //String matrizInfo[][]=new String[listaClientes.size()][3];
 

@@ -4,6 +4,10 @@
  */
 package com.tfg.supportbank.vistas;
 
+import com.tfg.supportbank.dao.ClienteDao;
+import com.tfg.supportbank.dos.ClienteDo;
+import java.util.Random;
+
 /**
  *
  * @author Kara
@@ -49,9 +53,9 @@ public class CrearCliente extends javax.swing.JFrame {
         referenciafamiliar = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         referenciapersonal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCrearCliente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 153));
 
@@ -61,7 +65,7 @@ public class CrearCliente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Apellido:");
+        jLabel2.setText("Primer apellido:");
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +99,7 @@ public class CrearCliente extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado Civil:");
 
-        estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero", " " }));
+        estadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Divorciado", "Soltero", "Viudo", " ", " " }));
         estadocivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estadocivilActionPerformed(evt);
@@ -130,9 +134,14 @@ public class CrearCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("CREAR CLIENTE");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btnCrearCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCrearCliente.setText("CREAR CLIENTE");
+        btnCrearCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,20 +152,19 @@ public class CrearCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(864, 864, 864))
+                        .addGap(861, 861, 861))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +182,7 @@ public class CrearCliente extends javax.swing.JFrame {
                                 .addComponent(referenciafamiliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(referenciapersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -224,7 +232,7 @@ public class CrearCliente extends javax.swing.JFrame {
                             .addComponent(referenciafamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,6 +277,19 @@ public class CrearCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_referenciapersonalActionPerformed
 
+    private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
+        String sql = "INSERT INTO CLIENTE(" +
+                    " cedula,nombre,apellido1,apellido2,direccion,telefono,email,"
+                    + "estado_civil,ingresos,empresa,ref_familiar,ref_personal,fecha_entrada_empresa,"
+                    + "puntos_data_credito, fecha_llamar,idAsesor) "
+               + "VALUES "
+               + "(?,?,?,?,?,?,?,?,?,?,?,?, DATE '2015-02-01',?,null,?)"; //fecha llamar DATE '2023-04-05'
+        //TODO: AGREGAR AL FORMULARIO FECHA ENTRADA A LA EMPRESA Y SEGUNDO APELLIDO
+        ClienteDo clienteDo = toClienteDo();
+        ClienteDao clienteDao = new ClienteDao();
+        clienteDao.addCliente(sql, clienteDo);
+    }//GEN-LAST:event_btnCrearClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,13 +327,13 @@ public class CrearCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
+    private javax.swing.JButton btnCrearCliente;
     private javax.swing.JTextField cedula;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField empresa;
     private javax.swing.JComboBox<String> estadocivil;
     private javax.swing.JTextField ingresos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -330,4 +351,24 @@ public class CrearCliente extends javax.swing.JFrame {
     private javax.swing.JTextField referenciapersonal;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
+
+    private ClienteDo toClienteDo() {
+        ClienteDo clienteDo = new ClienteDo();
+        
+        clienteDo.setNombre(nombre.getText());
+        clienteDo.setApellido1(apellido.getText());
+        clienteDo.setApellido2(apellido.getText());
+        clienteDo.setCedula(Integer.valueOf(cedula.getText()));
+        clienteDo.setDireccion(direccion.getText());
+        clienteDo.setTelefono(Integer.valueOf(telefono.getText()));
+        clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
+        clienteDo.setEmail(correo.getText());
+        clienteDo.setIngresos(Float.valueOf(ingresos.getText()));
+        clienteDo.setEmpresa(empresa.getText());
+        clienteDo.setReFamiliar(referenciafamiliar.getText());
+        clienteDo.setRefPersonal(referenciapersonal.getText());
+        clienteDo.setPuntosDataCredito((int)Math.random()*100 + 1);
+        
+        return clienteDo;
+    }
 }

@@ -4,6 +4,7 @@ package com.tfg.supportbank.dao;
 import com.tfg.supportbank.connection.sql.ConnectionSqlBdPfgBanco;
 import com.tfg.supportbank.dos.ClienteDo;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,9 +21,10 @@ import javax.swing.JOptionPane;
 public class ClienteDao {
     
     private Connection connection;
+    ConnectionSqlBdPfgBanco conex;
     
     public ClienteDao(){
-        ConnectionSqlBdPfgBanco conex = new ConnectionSqlBdPfgBanco();
+        conex = new ConnectionSqlBdPfgBanco();
         Connection conexionSql = conex.conectar();
         connection = conex.getConnection();
         probarConexionSql();
@@ -30,11 +32,10 @@ public class ClienteDao {
     Connection conexionSql = sqlConnection.conectar();*/
     }
     
-    public List<ClienteDo> buscarClientesMatriz() {
+    public List<ClienteDo> findAllClientes() {
         List<ClienteDo> listaClientes = new ArrayList();
         ClienteDo clienteDo;
-        try {
-              final 
+        try { 
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery("SELECT * FROM Cliente ");
 
@@ -45,15 +46,53 @@ public class ClienteDao {
          }
          rs.close();
          statement.close();
-         //conex.desconectar();
+         conex.desconectar();
 
         } catch (SQLException e) {
          System.out.println(e.getMessage());
-         JOptionPane.showMessageDialog(null, "Error al consultar" + e.getMessage(), "Error",
+         JOptionPane.showMessageDialog(null, "Error al consultar clientes " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
 
         }
         return listaClientes;
+    }
+    
+    public void addCliente (String sql, ClienteDo clienteDo){
+        
+        //Statement statement = connection.createStatement();
+        try{
+            
+            PreparedStatement guardar = connection.prepareStatement(sql);
+            
+            guardar.setInt(1, clienteDo.getCedula());
+            guardar.setString(2, clienteDo.getNombre());
+            guardar.setString(3, clienteDo.getApellido1());
+            guardar.setString(4, clienteDo.getApellido2());
+            guardar.setString(5, clienteDo.getDireccion());
+            guardar.setInt(6, clienteDo.getTelefono());
+            guardar.setString(7, clienteDo.getEmail());
+            guardar.setString(8, clienteDo.getEstadoCivil());
+            guardar.setFloat(9, clienteDo.getIngresos());
+            guardar.setString(10, clienteDo.getEmpresa());
+            guardar.setString(11, clienteDo.getReFamiliar());
+            guardar.setString(12, clienteDo.getRefPersonal());
+            //guardar.setDate(13, clienteDo.getFechaEntradaEmpresa());
+            guardar.setInt(13, clienteDo.getPuntosDataCredito());
+            //guardar.setDate(15, clienteDo.getFechaLlamar());
+            guardar.setInt(14, Integer.valueOf(clienteDo.getIdAsesor()));
+           // guardar.setDate(12, "DATE '"+clienteDo.getFechaLlamar()+"'");
+            
+            
+            guardar.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cliente Registrado");
+            guardar.close();
+            conex.desconectar();
+            
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al agregar cliente " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void clientetoDo(ClienteDo clienteDo, ResultSet rs) throws SQLException {
