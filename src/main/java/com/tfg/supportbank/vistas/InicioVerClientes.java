@@ -43,7 +43,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado Clientes");
 
-        panelIniVerCliente.setBackground(new java.awt.Color(0, 0, 153));
+        panelIniVerCliente.setBackground(new java.awt.Color(0, 51, 102));
         panelIniVerCliente.setForeground(new java.awt.Color(0, 0, 153));
         panelIniVerCliente.setToolTipText("");
 
