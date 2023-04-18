@@ -128,5 +128,9 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null,"Conexion a la bbdd sql OK");
         }
     }
+
+    public void updateCliente(String sql, ClienteDo clienteDo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

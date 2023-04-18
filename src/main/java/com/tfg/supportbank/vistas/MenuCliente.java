@@ -77,6 +77,11 @@ public class MenuCliente extends javax.swing.JFrame {
 
         btnEliminarCliente.setText("ELIMINAR");
         btnEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kara_\\Desktop\\cliente0.png")); // NOI18N
         jLabel1.setText("jLabel1");
@@ -93,7 +98,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                             .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -148,6 +153,11 @@ public class MenuCliente extends javax.swing.JFrame {
         ModificarCliente ventanaModificarCliente = new ModificarCliente();
         ventanaModificarCliente.setVisible(true);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
+
+    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+       DeshabilitarCliente ventanaDeshabilitarCliente = new DeshabilitarCliente();
+       ventanaDeshabilitarCliente.setVisible(true);
+    }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     /**
      * @param args the command line arguments

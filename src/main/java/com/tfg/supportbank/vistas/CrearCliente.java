@@ -63,7 +63,6 @@ public class CrearCliente extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         segundoapellido = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        fecEntradaEmpresa2 = new javax.swing.JTextField();
         fecEntradaEmpresa = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -160,8 +159,6 @@ public class CrearCliente extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Fec. entrada empresa:");
 
-        fecEntradaEmpresa2.setText("YYYY-MM-DD");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,10 +216,6 @@ public class CrearCliente extends javax.swing.JFrame {
                             .addComponent(referenciafamiliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(referenciapersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(330, 330, 330))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(266, 266, 266)
-                .addComponent(fecEntradaEmpresa2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,9 +276,7 @@ public class CrearCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(referenciapersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(fecEntradaEmpresa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -379,7 +370,6 @@ public class CrearCliente extends javax.swing.JFrame {
     private javax.swing.JTextField empresa;
     private javax.swing.JComboBox<String> estadocivil;
     private com.toedter.calendar.JDateChooser fecEntradaEmpresa;
-    private javax.swing.JTextField fecEntradaEmpresa2;
     private javax.swing.JTextField ingresos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
