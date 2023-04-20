@@ -199,5 +199,27 @@ public class ClienteDao {
         }
     }    
 
+    public void eliminarCliente(String sql, String cedula) {
+        try {          
+         PreparedStatement eliminar = connection.prepareStatement(sql);    
+         
+         eliminar.setString(1, cedula);
+         
+         //ResultSet rs = buscar.executeQuery();
+         eliminar.executeUpdate();
+         
+         
+         eliminar.close();
+         conex.desconectar();
+         JOptionPane.showMessageDialog(null, "Cliente Elimiado");
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al eliminar cliente " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
  
 }

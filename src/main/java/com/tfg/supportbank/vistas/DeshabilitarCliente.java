@@ -4,6 +4,8 @@
  */
 package com.tfg.supportbank.vistas;
 
+import com.tfg.supportbank.dao.ClienteDao;
+import com.tfg.supportbank.dos.ClienteDo;
 import javax.swing.JOptionPane;
 
 /**
@@ -123,8 +125,16 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFormModClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormModClienteActionPerformed
-        if (null != lblCedulaClienteDeshabilitar && !lblCedulaClienteDeshabilitar.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Deshabilitar cliente");
+        
+        if (null != lblCedulaClienteDeshabilitar && !lblCedulaClienteDeshabilitar.getText().isEmpty()){           
+            String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
+            ClienteDao clienteDao = new ClienteDao();
+            Integer ced = Integer.valueOf(lblCedulaClienteDeshabilitar.getText());
+            ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+            if (null != clienteDo){
+                String sqlDelete = "DELETE FROM cliente WHERE cedula = ?";
+                clienteDao.eliminarCliente(sqlDelete,lblCedulaClienteDeshabilitar.getText());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");
         }
