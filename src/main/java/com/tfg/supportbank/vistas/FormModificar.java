@@ -25,14 +25,12 @@ public class FormModificar extends javax.swing.JFrame {
 
     private void findClienteByCedula() {
         String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
-        //cedula.setText(String.valueOf(258963147));
         ClienteDao clienteDao = new ClienteDao();
         Integer ced = Integer.valueOf(cedulaCliente);
         ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
         if (null != clienteDo){
             setFormModifyData(clienteDo);
-        }
-        
+        }        
     }
 
     /**
@@ -311,10 +309,11 @@ public class FormModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_ingresosActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
+            
         String sql = "UPDATE CLIENTE SET " +
         " nombre = ?,apellido1 = ?,apellido2 = ?,direccion = ?,telefono = ?,email = ?,"
         + "estado_civil = ?,ingresos = ?,empresa = ?,"
-        + "puntos_data_credito = ?,) "
+        + "puntos_data_credito = ? "
         + " WHERE cedula = ?"
         ; 
         
@@ -410,13 +409,6 @@ public class FormModificar extends javax.swing.JFrame {
             clienteDo.setIngresos(Float.valueOf(ingresos.getText()));
             clienteDo.setEmpresa(empresa.getText());
             clienteDo.setPuntosDataCredito((int)Math.random()*100 + 1);
-            
-            
-       /* } catch (ParseException ex) {
-            Logger.getLogger(CrearCliente.class.getName()).log(Level.SEVERE, "Error parseo de fecha ", ex);
-            JOptionPane.showMessageDialog(null, "Error al parsear la fecha, el formato es yyyy-mm-dd");
-        }*/
-        
         return clienteDo;
     }
 

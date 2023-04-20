@@ -131,14 +131,7 @@ public class ClienteDao {
         
     public ClienteDo findClienteByCedula(String sql, Integer cedula) {
         ClienteDo clienteDo = null;
-        try { 
-         //PreparedStatement buscar = connection.prepareStatement("SELECT * from cliente WHERE  cedula = '11111111'");
-         //buscar.setInt(1, cedula);
-         //ResultSet rs = buscar.executeQuery(sql);
-         //buscar.executeUpdate();
-         /*Statement buscar = connection.createStatement();
-         ResultSet rs = buscar.executeQuery("SELECT * from cliente WHERE  cedula = ?");*/
-         
+        try {          
          PreparedStatement buscar = connection.prepareStatement(sql);            
          buscar.setInt(1, cedula);
          
@@ -170,6 +163,40 @@ public class ClienteDao {
         + " WHERE cedula = ?"
         ; 
          */
+        //ClienteDo clienteDo = null;
+        try {          
+         PreparedStatement preparedStatement = connection.prepareStatement(sql);   
+         
+         
+         preparedStatement.setString(1, clienteDo.getNombre());
+         preparedStatement.setString(2, clienteDo.getApellido1());
+         preparedStatement.setString(3, clienteDo.getApellido2());
+         preparedStatement.setString(4, clienteDo.getDireccion());
+         preparedStatement.setInt(5, clienteDo.getTelefono());
+         preparedStatement.setString(6, clienteDo.getEmail());
+         preparedStatement.setString(7, clienteDo.getEstadoCivil());
+         preparedStatement.setFloat(8, clienteDo.getIngresos());
+         preparedStatement.setString(9, clienteDo.getEmpresa());
+         preparedStatement.setInt(10, clienteDo.getPuntosDataCredito());
+         preparedStatement.setInt(11, clienteDo.getCedula());
+         
+         preparedStatement.executeUpdate();
+         /*while (rs.next()) {
+          clienteDo = new ClienteDo();
+          clientetoDo(clienteDo, rs);     
+         }*/
+      
+        
+         preparedStatement.close();
+         conex.desconectar();
+         JOptionPane.showMessageDialog(null, "Cliente Modificado");
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
     }    
 
  
