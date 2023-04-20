@@ -128,9 +128,49 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null,"Conexion a la bbdd sql OK");
         }
     }
+        
+    public ClienteDo findClienteByCedula(String sql, Integer cedula) {
+        ClienteDo clienteDo = null;
+        try { 
+         //PreparedStatement buscar = connection.prepareStatement("SELECT * from cliente WHERE  cedula = '11111111'");
+         //buscar.setInt(1, cedula);
+         //ResultSet rs = buscar.executeQuery(sql);
+         //buscar.executeUpdate();
+         /*Statement buscar = connection.createStatement();
+         ResultSet rs = buscar.executeQuery("SELECT * from cliente WHERE  cedula = ?");*/
+         
+         PreparedStatement buscar = connection.prepareStatement(sql);            
+         buscar.setInt(1, cedula);
+         
+         ResultSet rs = buscar.executeQuery();
+         while (rs.next()) {
+          clienteDo = new ClienteDo();
+          clientetoDo(clienteDo, rs);     
+         }
+         rs.close();
+         buscar.close();
+         conex.desconectar();
+         JOptionPane.showMessageDialog(null, "Cliente encontrado");
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
+        return clienteDo;
+    }
 
     public void updateCliente(String sql, ClienteDo clienteDo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+        /**
+         * String sql = "UPDATE CLIENTE SET " +
+        " nombre = ?,apellido1 = ?,apellido2 = ?,direccion = ?,telefono = ?,email = ?,"
+        + "estado_civil = ?,ingresos = ?,empresa = ?,"
+        + "puntos_data_credito = ?,) "
+        + " WHERE cedula = ?"
+        ; 
+         */
+    }    
+
+ 
 }

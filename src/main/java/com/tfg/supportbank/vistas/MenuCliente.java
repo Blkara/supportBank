@@ -39,7 +39,7 @@ public class MenuCliente extends javax.swing.JFrame {
         btnVerCliente = new javax.swing.JButton();
         btnCrearCliente = new javax.swing.JButton();
         btnModificarCliente = new javax.swing.JButton();
-        btnEliminarCliente = new javax.swing.JButton();
+        btnDeshabilitar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,11 +75,11 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarCliente.setText("ELIMINAR");
-        btnEliminarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnDeshabilitar.setText("DEHABILITAR");
+        btnDeshabilitar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarClienteActionPerformed(evt);
+                btnDeshabilitarActionPerformed(evt);
             }
         });
 
@@ -91,27 +91,26 @@ public class MenuCliente extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, Short.MAX_VALUE)))
+                .addGap(171, 171, 171)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeshabilitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, Short.MAX_VALUE)
                 .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(321, 321, 321))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVerCliente)
@@ -120,7 +119,7 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(btnModificarCliente)
                         .addGap(41, 41, 41)
-                        .addComponent(btnEliminarCliente))
+                        .addComponent(btnDeshabilitar))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -154,10 +153,10 @@ public class MenuCliente extends javax.swing.JFrame {
         ventanaModificarCliente.setVisible(true);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
-    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+    private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed
        DeshabilitarCliente ventanaDeshabilitarCliente = new DeshabilitarCliente();
        ventanaDeshabilitarCliente.setVisible(true);
-    }//GEN-LAST:event_btnEliminarClienteActionPerformed
+    }//GEN-LAST:event_btnDeshabilitarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,7 +195,7 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCliente;
-    private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JButton btnDeshabilitar;
     private javax.swing.JButton btnModificarCliente;
     private javax.swing.JButton btnVerCliente;
     private javax.swing.JTextField cliente;

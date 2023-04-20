@@ -6,18 +6,33 @@ package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author Kara
- */
 public class FormModificar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormModificar
-     */
+    String cedulaCliente;
+    
     public FormModificar() {
         initComponents();
+    }
+
+    FormModificar(String cedula) {
+        initComponents();
+        this.cedulaCliente = cedula;
+        findClienteByCedula();
+    }
+
+    private void findClienteByCedula() {
+        String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
+        //cedula.setText(String.valueOf(258963147));
+        ClienteDao clienteDao = new ClienteDao();
+        Integer ced = Integer.valueOf(cedulaCliente);
+        ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+        if (null != clienteDo){
+            setFormModifyData(clienteDo);
+        }
+        
     }
 
     /**
@@ -376,7 +391,46 @@ public class FormModificar extends javax.swing.JFrame {
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 
-    private ClienteDo toClienteDo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private ClienteDo toClienteDo() {        
+        ClienteDo clienteDo = new ClienteDo();
+       // try {
+            
+            Date fechaEntradaEmpresa = null;
+            
+            //Date fecha = fecEntradaEmpresa.getDate();
+            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");            
+            clienteDo.setNombre(nombre.getText());
+            clienteDo.setApellido1(apellido.getText());
+            clienteDo.setApellido2(segundoapellido.getText());
+            clienteDo.setCedula(Integer.valueOf(cedula.getText()));
+            clienteDo.setDireccion(direccion.getText());
+            clienteDo.setTelefono(Integer.valueOf(telefono.getText()));
+            clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
+            clienteDo.setEmail(correo.getText());
+            clienteDo.setIngresos(Float.valueOf(ingresos.getText()));
+            clienteDo.setEmpresa(empresa.getText());
+            clienteDo.setPuntosDataCredito((int)Math.random()*100 + 1);
+            
+            
+       /* } catch (ParseException ex) {
+            Logger.getLogger(CrearCliente.class.getName()).log(Level.SEVERE, "Error parseo de fecha ", ex);
+            JOptionPane.showMessageDialog(null, "Error al parsear la fecha, el formato es yyyy-mm-dd");
+        }*/
+        
+        return clienteDo;
+    }
+
+    private void setFormModifyData(ClienteDo clienteDo) {
+        cedula.setText(String.valueOf(clienteDo.getCedula()));
+        nombre.setText(clienteDo.getNombre());
+        apellido.setText(clienteDo.getApellido1());
+        segundoapellido.setText(clienteDo.getApellido2());
+        direccion.setText(clienteDo.getDireccion());
+        telefono.setText(String.valueOf(clienteDo.getTelefono()));
+        estadocivil.addItem(clienteDo.getEstadoCivil());
+        ingresos.setText(String.valueOf(clienteDo.getIngresos()));
+        empresa.setText(clienteDo.getEmpresa());
+        correo.setText(clienteDo.getEmail());
+        puntosDatacredito.setText(String.valueOf(clienteDo.getPuntosDataCredito()));
     }
 }
