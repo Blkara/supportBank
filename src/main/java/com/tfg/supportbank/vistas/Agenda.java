@@ -4,6 +4,18 @@
  */
 package com.tfg.supportbank.vistas;
 
+import com.tfg.supportbank.dao.ClienteDao;
+import com.tfg.supportbank.dos.ClienteDo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kara
@@ -28,10 +40,11 @@ public class Agenda extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        jTextField1 = new javax.swing.JTextField();
+        fechaLLamar = new com.toedter.calendar.JCalendar();
+        horaLlamar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAgendarLlamada = new javax.swing.JButton();
+        lblCedulaCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,9 +56,14 @@ public class Agenda extends javax.swing.JFrame {
         jLabel1.setText("AGENDA");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Ingresar Documneto");
+        horaLlamar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        horaLlamar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        horaLlamar.setText("HH:MM:SS hora llamar");
+        horaLlamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                horaLlamarActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Escanear");
@@ -56,50 +74,57 @@ public class Agenda extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Agregar Evento");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgendarLlamada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgendarLlamada.setText("Agregar Evento");
+        btnAgendarLlamada.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgendarLlamada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendarLlamadaActionPerformed(evt);
+            }
+        });
+
+        lblCedulaCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCedulaCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblCedulaCliente.setText("Ingresar Documento");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(366, 366, 366)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(366, 366, 366)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addGap(54, 54, 54))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                        .addGap(135, 135, 135)
+                        .addComponent(fechaLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(horaLlamar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(lblCedulaCliente)
+                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(105, 105, 105)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addComponent(horaLlamar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,6 +149,84 @@ public class Agenda extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void horaLlamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaLlamarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_horaLlamarActionPerformed
+
+    private void btnAgendarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarLlamadaActionPerformed
+        // TODO comprobar cedula
+        if (null != lblCedulaCliente && !lblCedulaCliente.getText().isEmpty()){
+            //TODO  comprobar que la fecha sea hay fecha seleccionada
+            if (null != fechaLLamar && null != fechaLLamar.getDate())
+            // TODO comprobar formato horaLLamar
+            if (null != horaLlamar && !horaLlamar.getText().isEmpty()){
+                String horaLLamar = horaLlamar.getText();
+                Pattern p = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
+                Matcher matcher = p.matcher(horaLLamar); 
+                boolean formatoFechaOk = matcher.matches(); 
+                
+                if (formatoFechaOk){
+                    // TODO buscar cliente0
+                    String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
+                    ClienteDao clienteDao = new ClienteDao();
+                    Integer ced = Integer.valueOf(lblCedulaCliente.getText());
+                    ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+                    if (null != clienteDo){
+                        // TODO agregar hora a la horaLLamar
+                        
+                        
+                        //String myDateString = "13:24:40"; //La hora con forma de String
+
+                        //Creamos la hora con formato del api Java
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                        Date date;
+                        try {
+                            date = sdf.parse(horaLLamar);
+                            
+                            JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
+                            
+                            
+                            
+                            Calendar horallamada = Calendar.getInstance();
+                            horallamada.setTime(date);
+                            int minutos = horallamada.get(Calendar.MINUTE);
+                            int hora = horallamada.get(Calendar.HOUR);
+                            
+                            
+                            
+                        
+                            //lo que más quieras sumar
+                           // Date fechaSalida = calendar.getTime(); //Y ya tienes la horaLLamar sumada.
+                           /* Calendar llamarCalendar = fechaLLamar.getCalendar();
+                            llamarCalendar.set(Calendar.HOUR_OF_DAY, hora);
+                            llamarCalendar.set(Calendar.MINUTE, minutos);*/
+                            
+                           /* JOptionPane.showMessageDialog(null, "fecha calendar: " + llamarCalendar.getTime());
+                            JOptionPane.showMessageDialog(null, "fecha calendar long: " + new  java.sql.Date (llamarCalendar.getTime().getTime()));*/
+                            //JOptionPane.showMessageDialog(null, "fecha llamada: " + fechaSalida.toString());                            
+                            //clienteDo.setFechaLlamar(llamarCalendar.getTime());
+                            
+                            clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(null, "Error en el parseo de hora");
+                        }                    
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El cliente indicado no existe");
+                    }
+                }  else{//else de hora
+                    JOptionPane.showMessageDialog(null, "Debe introducir una hora con formato HH:MM 24 horas");
+                }
+            } else { //si no introduce hora
+                JOptionPane.showMessageDialog(null, "Debe introducir una hora, HH:MM 24 horas");
+            }          
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");
+        }
+        
+        
+    }//GEN-LAST:event_btnAgendarLlamadaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,11 +264,12 @@ public class Agenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgendarLlamada;
+    private com.toedter.calendar.JCalendar fechaLLamar;
+    private javax.swing.JTextField horaLlamar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField lblCedulaCliente;
     // End of variables declaration//GEN-END:variables
 }

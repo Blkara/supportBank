@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -155,15 +156,7 @@ public class ClienteDao {
     }
 
     public void updateCliente(String sql, ClienteDo clienteDo) {
-        /**
-         * String sql = "UPDATE CLIENTE SET " +
-        " nombre = ?,apellido1 = ?,apellido2 = ?,direccion = ?,telefono = ?,email = ?,"
-        + "estado_civil = ?,ingresos = ?,empresa = ?,"
-        + "puntos_data_credito = ?,) "
-        + " WHERE cedula = ?"
-        ; 
-         */
-        //ClienteDo clienteDo = null;
+
         try {          
          PreparedStatement preparedStatement = connection.prepareStatement(sql);   
          
@@ -181,12 +174,6 @@ public class ClienteDao {
          preparedStatement.setInt(11, clienteDo.getCedula());
          
          preparedStatement.executeUpdate();
-         /*while (rs.next()) {
-          clienteDo = new ClienteDo();
-          clientetoDo(clienteDo, rs);     
-         }*/
-      
-        
          preparedStatement.close();
          conex.desconectar();
          JOptionPane.showMessageDialog(null, "Cliente Modificado");
@@ -216,6 +203,40 @@ public class ClienteDao {
         } catch (SQLException e) {
          System.out.println(e.getMessage());
          JOptionPane.showMessageDialog(null, "Error al eliminar cliente " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    public void updateFechaLlamar(int cedula, Date time, String hora) {
+        try {          
+         String sql = "UPDATE CLIENTE SET fecha_llamar = ?, hora_llamar = ?  WHERE  cedula = ?";
+         PreparedStatement preparedStatement = connection.prepareStatement(sql);   
+         
+         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+         String fechaLlamar = formatoFecha.format(time);
+         
+         
+        /*String fecha = "to_date('"+ fechaLlamar +"', 'yyyy-MM-dd HH:mm:ss') ";
+            final java.sql.Date sqlDate = new java.sql.Date(time.getTime());*/
+            /*sqlDate.setHours(9);
+            sqlDate.setHours(30);*/
+         
+         //preparedStatement.setString(1, fecha);
+         //preparedStatement.setDate(1, java.sql.Date.valueOf(fechaLlamar));
+         preparedStatement.setString(1, fechaLlamar);
+         preparedStatement.setString(2, hora);
+        // ps.setDate(2, java.sql.Date.valueOf("2013-09-04"));
+         preparedStatement.setInt(3, cedula);
+         
+         preparedStatement.executeUpdate();
+         preparedStatement.close();
+         conex.desconectar();
+         //JOptionPane.showMessageDialog(null, "Cliente Modificado: " + new java.sql.Date(time);
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
 
         }
