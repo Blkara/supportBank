@@ -50,6 +50,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
         panelIniVerCliente.setForeground(new java.awt.Color(0, 0, 153));
         panelIniVerCliente.setToolTipText("");
 
+        lblListadoClientes.setBackground(new java.awt.Color(0, 0, 153));
         lblListadoClientes.setForeground(new java.awt.Color(255, 255, 255));
         lblListadoClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblListadoClientes.setText("LISTADO DE CLIENTES A LLAMAR");
@@ -76,26 +77,28 @@ public class InicioVerClientes extends javax.swing.JFrame {
         panelIniVerCliente.setLayout(panelIniVerClienteLayout);
         panelIniVerClienteLayout.setHorizontalGroup(
             panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIniVerClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
             .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                .addGap(180, 180, 180)
                 .addGroup(panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(180, 180, 180)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                        .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93))))
+                        .addGap(239, 239, 239)
+                        .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         panelIniVerClienteLayout.setVerticalGroup(
             panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMenuClientes))
-                .addGap(82, 82, 82)
+                .addGap(53, 53, 53)
+                .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnMenuClientes)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(123, Short.MAX_VALUE))
         );
