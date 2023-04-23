@@ -140,12 +140,13 @@ public class ClienteDao {
          ResultSet rs = buscar.executeQuery();
          while (rs.next()) {
           clienteDo = new ClienteDo();
-          clientetoDo(clienteDo, rs);     
+          clientetoDo(clienteDo, rs);    
+          JOptionPane.showMessageDialog(null, "Cliente encontrado");
          }
          rs.close();
          buscar.close();
          conex.desconectar();
-         JOptionPane.showMessageDialog(null, "Cliente encontrado");
+         
 
         } catch (SQLException e) {
          System.out.println(e.getMessage());
