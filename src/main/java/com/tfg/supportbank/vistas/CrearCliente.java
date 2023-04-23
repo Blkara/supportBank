@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
@@ -14,10 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Kara
- */
 public class CrearCliente extends javax.swing.JFrame {
 
     /**
@@ -332,16 +324,18 @@ public class CrearCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_referenciapersonalActionPerformed
 
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
-        String sql = "INSERT INTO CLIENTE(" +
-                    " cedula,nombre,apellido1,apellido2,direccion,telefono,email,"
-                    + "estado_civil,ingresos,empresa,ref_familiar,ref_personal,fecha_entrada_empresa,"
-                    + "puntos_data_credito, fecha_llamar,idAsesor) "
-               + "VALUES "
-               + "(?,?,?,?,?,?,?,?,?,?,?,?, DATE '2015-02-01',?,null,?)"; //fecha llamar DATE '2023-04-05'
+         //fecha llamar DATE '2023-04-05'
         //TODO: AGREGAR AL FORMULARIO FECHA ENTRADA A LA EMPRESA Y SEGUNDO APELLIDO
-        ClienteDo clienteDo = toClienteDo();
+        
         ClienteDao clienteDao = new ClienteDao();
-        clienteDao.addCliente(sql, clienteDo);
+        // TODO COMPROBAR LOS PARAMETROS NULOS
+        ClienteDo cliente = clienteDao.findClienteByCedula(Integer.valueOf(cedula.getText()));
+        if (null == cliente){
+            ClienteDo clienteDo = toClienteDo();
+            clienteDao.addCliente(clienteDo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe el cliente con numero de cedula: " + cedula.getText());
+        }
     }//GEN-LAST:event_btnCrearClienteActionPerformed
 
     private void apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoActionPerformed
@@ -441,6 +435,7 @@ public class CrearCliente extends javax.swing.JFrame {
             clienteDo.setRefPersonal(referenciapersonal.getText());
             clienteDo.setFechaEntradaEmpresa(fecha  );
             clienteDo.setPuntosDataCredito((int)Math.random()*100 + 1);
+            clienteDo.setFechaEntradaEmpresa(fecEntradaEmpresa.getDate());
             
             
        /* } catch (ParseException ex) {

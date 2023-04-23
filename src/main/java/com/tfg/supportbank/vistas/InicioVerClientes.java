@@ -1,7 +1,9 @@
 package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.connection.sql.ConnectionSqlBdPfgBanco;
+import com.tfg.supportbank.dao.AsesorDao;
 import com.tfg.supportbank.dao.ClienteDao;
+import com.tfg.supportbank.dos.AsesorDo;
 import com.tfg.supportbank.dos.ClienteDo;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
         initComponents();
         //probarConexionSql();
         mostrarClientes();
+        probarLogin();
     }
 
     /**
@@ -163,8 +166,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
         
         tablaClientesLlamar.setModel(tClientes);
         setRowsDatos(datos,tClientes);
-        tablaClientesLlamar.setModel(tClientes);
-        
+        tablaClientesLlamar.setModel(tClientes);        
     }
     
     private void setRowsDatos(String[] datos, DefaultTableModel tClientes) {
@@ -228,6 +230,11 @@ public class InicioVerClientes extends javax.swing.JFrame {
     private javax.swing.JPanel panelIniVerCliente;
     private javax.swing.JTable tablaClientesLlamar;
     // End of variables declaration//GEN-END:variables
+
+    private void probarLogin() {
+        LoginForm ventanaLogin = new LoginForm();
+        ventanaLogin.setVisible(true);
+    }
 
 
 }

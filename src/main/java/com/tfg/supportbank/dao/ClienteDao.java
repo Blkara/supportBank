@@ -14,11 +14,6 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- * Clase que permite el acceso a la base de datos
- * 
- * 
- */
 public class ClienteDao {
     
     private Connection connection;
@@ -28,7 +23,7 @@ public class ClienteDao {
         conex = new ConnectionSqlBdPfgBanco();
         Connection conexionSql = conex.conectar();
         connection = conex.getConnection();
-        probarConexionSql();
+        //probarConexionSql();
            /*ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
     Connection conexionSql = sqlConnection.conectar();*/
     }
@@ -58,9 +53,19 @@ public class ClienteDao {
         return listaClientes;
     }
     
-    public void addCliente (String sql, ClienteDo clienteDo){
+    public void addCliente (ClienteDo clienteDo){
         
-        //Statement statement = connection.createStatement();
+        String sql = "INSERT INTO CLIENTE(" +
+                    " cedula,nombre,apellido1,apellido2,direccion,telefono,email,"
+                    + "estado_civil,ingresos,empresa,ref_familiar,ref_personal,fecha_entrada_empresa,"
+                    + "puntos_data_credito, fecha_llamar,idAsesor) "
+               + "VALUES "
+               + "(?,?,?,?,?,?,?,?,?,?,?,?, ?,?,null,?)";
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaEntradaEmpresa = formatoFecha.format(clienteDo.getFechaEntradaEmpresa());
+        //String fechaLlamar = formatoFecha.format(clienteDo.getFechaLlamar());
+        
         try{
             
             PreparedStatement guardar = connection.prepareStatement(sql);
@@ -77,10 +82,10 @@ public class ClienteDao {
             guardar.setString(10, clienteDo.getEmpresa());
             guardar.setString(11, clienteDo.getReFamiliar());
             guardar.setString(12, clienteDo.getRefPersonal());
-            //guardar.setDate(13, clienteDo.getFechaEntradaEmpresa());
-            guardar.setInt(13, clienteDo.getPuntosDataCredito());
-            //guardar.setDate(15, clienteDo.getFechaLlamar());
-            guardar.setInt(14, Integer.valueOf(clienteDo.getIdAsesor()));
+            guardar.setString(13, fechaEntradaEmpresa);
+            guardar.setInt(14, clienteDo.getPuntosDataCredito());
+            //guardar.setString(15, fechaLlamar);
+            guardar.setInt(15, Integer.valueOf(clienteDo.getIdAsesor()));
            // guardar.setDate(12, "DATE '"+clienteDo.getFechaLlamar()+"'");
             
             
@@ -116,12 +121,7 @@ public class ClienteDao {
         clienteDo.setIdAsesor(rs.getInt("idAsesor"));
     }
     
-        public void probarConexionSql(){
-        /*ConnectionSqlBdPfgBanco conex = new ConnectionSqlBdPfgBanco();*/
-        //Connection conexionSql = this.getConnection();
-         
-       /* ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
-    Connection conexionSql = sqlConnection.conectar();*/
+    public void probarConexionSql(){
         
         if (null == connection){
             JOptionPane.showMessageDialog(null,"No se ha realizado la conexion a la bbdd sql");
@@ -130,7 +130,8 @@ public class ClienteDao {
         }
     }
         
-    public ClienteDo findClienteByCedula(String sql, Integer cedula) {
+    public ClienteDo findClienteByCedula(Integer cedula) {
+        String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
         ClienteDo clienteDo = null;
         try {          
          PreparedStatement buscar = connection.prepareStatement(sql);            
@@ -155,7 +156,14 @@ public class ClienteDao {
         return clienteDo;
     }
 
-    public void updateCliente(String sql, ClienteDo clienteDo) {
+    public void updateCliente(ClienteDo clienteDo) {
+        
+        String sql = "UPDATE CLIENTE SET " +
+        " nombre = ?,apellido1 = ?,apellido2 = ?,direccion = ?,telefono = ?,email = ?,"
+        + "estado_civil = ?,ingresos = ?,empresa = ?,"
+        + "puntos_data_credito = ? "
+        + " WHERE cedula = ?"
+        ; 
 
         try {          
          PreparedStatement preparedStatement = connection.prepareStatement(sql);   
@@ -191,11 +199,8 @@ public class ClienteDao {
          PreparedStatement eliminar = connection.prepareStatement(sql);    
          
          eliminar.setString(1, cedula);
-         
-         //ResultSet rs = buscar.executeQuery();
-         eliminar.executeUpdate();
-         
-         
+       
+         eliminar.executeUpdate();         
          eliminar.close();
          conex.desconectar();
          JOptionPane.showMessageDialog(null, "Cliente Elimiado");
@@ -216,23 +221,13 @@ public class ClienteDao {
          SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
          String fechaLlamar = formatoFecha.format(time);
          
-         
-        /*String fecha = "to_date('"+ fechaLlamar +"', 'yyyy-MM-dd HH:mm:ss') ";
-            final java.sql.Date sqlDate = new java.sql.Date(time.getTime());*/
-            /*sqlDate.setHours(9);
-            sqlDate.setHours(30);*/
-         
-         //preparedStatement.setString(1, fecha);
-         //preparedStatement.setDate(1, java.sql.Date.valueOf(fechaLlamar));
          preparedStatement.setString(1, fechaLlamar);
          preparedStatement.setString(2, hora);
-        // ps.setDate(2, java.sql.Date.valueOf("2013-09-04"));
          preparedStatement.setInt(3, cedula);
          
          preparedStatement.executeUpdate();
          preparedStatement.close();
          conex.desconectar();
-         //JOptionPane.showMessageDialog(null, "Cliente Modificado: " + new java.sql.Date(time);
 
         } catch (SQLException e) {
          System.out.println(e.getMessage());

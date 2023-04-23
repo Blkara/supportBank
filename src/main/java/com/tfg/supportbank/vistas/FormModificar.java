@@ -20,10 +20,9 @@ public class FormModificar extends javax.swing.JFrame {
     }
 
     private void findClienteByCedula() {
-        String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
         ClienteDao clienteDao = new ClienteDao();
         Integer ced = Integer.valueOf(cedulaCliente);
-        ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+        ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
         if (null != clienteDo){
             setFormModifyData(clienteDo);
         }        
@@ -306,16 +305,11 @@ public class FormModificar extends javax.swing.JFrame {
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
             
-        String sql = "UPDATE CLIENTE SET " +
-        " nombre = ?,apellido1 = ?,apellido2 = ?,direccion = ?,telefono = ?,email = ?,"
-        + "estado_civil = ?,ingresos = ?,empresa = ?,"
-        + "puntos_data_credito = ? "
-        + " WHERE cedula = ?"
-        ; 
+        
         
         ClienteDo clienteDo = toClienteDo();
         ClienteDao clienteDao = new ClienteDao();
-        clienteDao.updateCliente(sql, clienteDo);
+        clienteDao.updateCliente(clienteDo);
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed

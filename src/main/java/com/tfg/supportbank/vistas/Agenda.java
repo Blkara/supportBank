@@ -168,10 +168,9 @@ public class Agenda extends javax.swing.JFrame {
                 
                 if (formatoFechaOk){
                     // TODO buscar cliente0
-                    String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
                     ClienteDao clienteDao = new ClienteDao();
                     Integer ced = Integer.valueOf(lblCedulaCliente.getText());
-                    ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+                    ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
                     if (null != clienteDo){
                         // TODO agregar hora a la horaLLamar
                         

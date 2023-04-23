@@ -127,10 +127,9 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
     private void btnFormModClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormModClienteActionPerformed
         
         if (null != lblCedulaClienteDeshabilitar && !lblCedulaClienteDeshabilitar.getText().isEmpty()){           
-            String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
             ClienteDao clienteDao = new ClienteDao();
             Integer ced = Integer.valueOf(lblCedulaClienteDeshabilitar.getText());
-            ClienteDo clienteDo = clienteDao.findClienteByCedula(sql, ced);
+            ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
             if (null != clienteDo){
                 String sqlDelete = "DELETE FROM cliente WHERE cedula = ?";
                 clienteDao.eliminarCliente(sqlDelete,lblCedulaClienteDeshabilitar.getText());
