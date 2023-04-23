@@ -2,6 +2,7 @@ package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import com.tfg.supportbank.util.ValidacionCamposCliente;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -445,6 +446,7 @@ public class CrearCliente extends javax.swing.JFrame {
     private ClienteDo toClienteDo() {
         ClienteDo clienteDo = new ClienteDo();
         List<javax.swing.JTextField> listCamposNotNull = new ArrayList<>();
+        ValidacionCamposCliente validacion = new ValidacionCamposCliente();
        // try {
             
             Date fechaEntradaEmpresa = null;
@@ -455,20 +457,20 @@ public class CrearCliente extends javax.swing.JFrame {
             //fechaEntradaEmpresa = formato.parse(fecEntradaEmpresa2.getText());
             
             
-            clienteDo.setNombre(validarCamposFormString(nombre,listCamposNotNull));
-            clienteDo.setApellido1(validarCamposFormString(apellido,listCamposNotNull));
+            clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
+            clienteDo.setApellido1(validacion.validarCamposFormString(apellido,listCamposNotNull));
             clienteDo.setApellido2(null != segundoapellido ? segundoapellido.getText(): "");
-            clienteDo.setCedula(validarCamposFormInteger(cedula,listCamposNotNull));
-            clienteDo.setDireccion(validarCamposFormString(direccion, listCamposNotNull));
-            clienteDo.setTelefono(validarCamposFormInteger(telefono,listCamposNotNull));
+            clienteDo.setCedula(validacion.validarCamposFormInteger(cedula,listCamposNotNull));
+            clienteDo.setDireccion(validacion.validarCamposFormString(direccion, listCamposNotNull));
+            clienteDo.setTelefono(validacion.validarCamposFormInteger(telefono,listCamposNotNull));
             clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
-            clienteDo.setEmail(validarCamposFormString(correo,listCamposNotNull));
-            clienteDo.setIngresos(validarCamposFormFloat(ingresos,listCamposNotNull));
-            clienteDo.setEmpresa(validarCamposFormString(empresa,listCamposNotNull));
+            clienteDo.setEmail(validacion.validarCamposFormString(correo,listCamposNotNull));
+            clienteDo.setIngresos(validacion.validarCamposFormFloat(ingresos,listCamposNotNull));
+            clienteDo.setEmpresa(validacion.validarCamposFormString(empresa,listCamposNotNull));
             clienteDo.setReFamiliar(referenciafamiliar.getText());
             clienteDo.setRefPersonal(referenciapersonal.getText());
             clienteDo.setFechaEntradaEmpresa(fecha  );
-            clienteDo.setPuntosDataCredito(validarCamposFormInteger(puntosDataCredito,listCamposNotNull));
+            clienteDo.setPuntosDataCredito(validacion.validarCamposFormInteger(puntosDataCredito,listCamposNotNull));
             clienteDo.setFechaEntradaEmpresa(fecEntradaEmpresa.getDate());
             
             
@@ -485,31 +487,4 @@ public class CrearCliente extends javax.swing.JFrame {
        }
     }
 
-    private String validarCamposFormString(JTextField campo, List<JTextField> listCamposNotNull) {
-         
-        if (null != campo && !campo.getText().isEmpty()){
-            return campo.getText();        
-        } else {
-            listCamposNotNull.add(campo);
-            return "";
-        }
-    }
-
-    private int validarCamposFormInteger(JTextField campo, List<JTextField> listCamposNotNull) {
-        if (null != campo && !campo.getText().isEmpty()){
-            return Integer.valueOf(campo.getText());  
-        } else {
-            listCamposNotNull.add(campo);
-            return 0;
-        }
-    }
-    
-    private float validarCamposFormFloat(JTextField campo, List<JTextField> listCamposNotNull) {
-        if (null != campo && !campo.getText().isEmpty()){
-            return Float.valueOf(campo.getText());  
-        } else {
-            listCamposNotNull.add(campo);
-            return 0;
-        }
-    }
 }

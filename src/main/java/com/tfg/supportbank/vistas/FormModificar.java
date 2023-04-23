@@ -2,8 +2,13 @@ package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import com.tfg.supportbank.util.ValidacionCamposCliente;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class FormModificar extends javax.swing.JFrame {
 
@@ -304,12 +309,11 @@ public class FormModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_ingresosActionPerformed
 
     private void btnModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarClienteActionPerformed
-            
-        
-        
-        ClienteDo clienteDo = toClienteDo();
-        ClienteDao clienteDao = new ClienteDao();
-        clienteDao.updateCliente(clienteDo);
+        ClienteDo clienteDo = toClienteDo();        
+        if (null != clienteDo){                
+            ClienteDao clienteDao = new ClienteDao();
+            clienteDao.updateCliente(clienteDo);
+        }
     }//GEN-LAST:event_btnModificarClienteActionPerformed
 
     private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
@@ -382,24 +386,36 @@ public class FormModificar extends javax.swing.JFrame {
 
     private ClienteDo toClienteDo() {        
         ClienteDo clienteDo = new ClienteDo();
+        List<javax.swing.JTextField> listCamposNotNull = new ArrayList<>();
+        ValidacionCamposCliente validacion = new ValidacionCamposCliente();
        // try {
             
             Date fechaEntradaEmpresa = null;
             
             //Date fecha = fecEntradaEmpresa.getDate();
             //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");            
-            clienteDo.setNombre(nombre.getText());
-            clienteDo.setApellido1(apellido.getText());
-            clienteDo.setApellido2(segundoapellido.getText());
-            clienteDo.setCedula(Integer.valueOf(cedula.getText()));
-            clienteDo.setDireccion(direccion.getText());
-            clienteDo.setTelefono(Integer.valueOf(telefono.getText()));
+            clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
+            clienteDo.setApellido1(validacion.validarCamposFormString(apellido,listCamposNotNull));
+            clienteDo.setApellido2(null != segundoapellido ? segundoapellido.getText(): "");
+            clienteDo.setCedula(validacion.validarCamposFormInteger(cedula,listCamposNotNull));
+            clienteDo.setDireccion(validacion.validarCamposFormString(direccion, listCamposNotNull));
+            clienteDo.setTelefono(validacion.validarCamposFormInteger(telefono,listCamposNotNull));
             clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
-            clienteDo.setEmail(correo.getText());
-            clienteDo.setIngresos(Float.valueOf(ingresos.getText()));
-            clienteDo.setEmpresa(empresa.getText());
-            clienteDo.setPuntosDataCredito((int)Math.random()*100 + 1);
+            clienteDo.setEmail(validacion.validarCamposFormString(correo,listCamposNotNull));
+            clienteDo.setIngresos(validacion.validarCamposFormFloat(ingresos,listCamposNotNull));
+            clienteDo.setEmpresa(validacion.validarCamposFormString(empresa,listCamposNotNull));
+            clienteDo.setPuntosDataCredito(validacion.validarCamposFormInteger(puntosDatacredito,listCamposNotNull));
+               if (listCamposNotNull.isEmpty())        
         return clienteDo;
+       else {           
+            JOptionPane.showMessageDialog(null, "Debe rellenar los campos Not Null"  );
+            Color color=new Color(255,191,170);            
+            listCamposNotNull.stream().forEach(elem -> {
+                elem.setForeground(color);
+                elem.setBackground(color);                    
+                    });
+            return null;
+       }
     }
 
     private void setFormModifyData(ClienteDo clienteDo) {
