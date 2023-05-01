@@ -11,7 +11,7 @@ public class ClienteDo {
   String apellido1;
   String apellido2;
   String direccion;
-  int telefono;
+  float telefono;
   String email;
   String estadoCivil;
   float ingresos;
@@ -71,11 +71,11 @@ public class ClienteDo {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public float getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(float telefono) {
         this.telefono = telefono;
     }
 
