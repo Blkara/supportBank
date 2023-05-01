@@ -401,10 +401,10 @@ public class CrearCliente extends javax.swing.JFrame {
         List<javax.swing.JTextField> listCamposNotNull = new ArrayList<>();
         //verficacion de que el campo cedula que se ha ingresado sea un numero ya que en bbdd es numerico
         ValidacionCampos validacion = new ValidacionCampos();
-        int valorCedula = validacion.validarCamposFormInteger(cedula,listCamposNotNull);
+        long valorCedula = validacion.validarCamposFormInteger(cedula,listCamposNotNull);
         if (0 != valorCedula){
             //buscar en bbdd un cliente por el número de cedula ingresado en el formulario
-            ClienteDo cliente = clienteDao.findClienteByCedula(Integer.valueOf(cedula.getText()));
+            ClienteDo cliente = clienteDao.findClienteByCedula(valorCedula);
             if (null == cliente){
                 ClienteDo clienteDo = toClienteDo();
                 if (null != clienteDo)
@@ -521,7 +521,7 @@ public class CrearCliente extends javax.swing.JFrame {
             clienteDo.setApellido2(null != segundoapellido ? segundoapellido.getText(): "");
             clienteDo.setCedula(validacion.validarCamposFormInteger(cedula,listCamposNotNull));
             clienteDo.setDireccion(validacion.validarCamposFormString(direccion, listCamposNotNull));
-            clienteDo.setTelefono(validacion.validarCamposFloat(telefono,listCamposNotNull));
+            clienteDo.setTelefono(validacion.validarCamposFormLong(telefono,listCamposNotNull));
             clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
             clienteDo.setEmail(validacion.validarEmail(correo,listCamposNotNull) ? correo.getText().trim() : "");
             clienteDo.setIngresos(validacion.validarCamposFormFloat(ingresos,listCamposNotNull));

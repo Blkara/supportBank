@@ -70,12 +70,12 @@ public class ClienteDao {
             
             PreparedStatement guardar = connection.prepareStatement(sql);
             
-            guardar.setInt(1, clienteDo.getCedula());
+            guardar.setLong(1, clienteDo.getCedula());
             guardar.setString(2, clienteDo.getNombre());
             guardar.setString(3, clienteDo.getApellido1());
             guardar.setString(4, clienteDo.getApellido2());
             guardar.setString(5, clienteDo.getDireccion());
-            guardar.setInt(6, clienteDo.getTelefono());
+            guardar.setLong(6, clienteDo.getTelefono());
             guardar.setString(7, clienteDo.getEmail());
             guardar.setString(8, clienteDo.getEstadoCivil());
             guardar.setFloat(9, clienteDo.getIngresos());
@@ -108,7 +108,7 @@ public class ClienteDao {
         clienteDo.setApellido1(rs.getString("apellido1"));
         clienteDo.setApellido2(rs.getString("apellido2"));
         clienteDo.setDireccion(rs.getString("direccion"));
-        clienteDo.setTelefono(rs.getInt("telefono"));
+        clienteDo.setTelefono(rs.getLong("telefono"));
         clienteDo.setEmail(rs.getString("email"));
         clienteDo.setEstadoCivil(rs.getString("estado_civil"));
         clienteDo.setIngresos(rs.getFloat("ingresos"));
@@ -130,12 +130,12 @@ public class ClienteDao {
         }
     }
         
-    public ClienteDo findClienteByCedula(Integer cedula) {
+    public ClienteDo findClienteByCedula(long cedula) {
         String sql = "SELECT * FROM CLIENTE WHERE cedula = ?";
         ClienteDo clienteDo = null;
         try {          
          PreparedStatement buscar = connection.prepareStatement(sql);            
-         buscar.setInt(1, cedula);
+         buscar.setLong(1, cedula);
          
          ResultSet rs = buscar.executeQuery();
          while (rs.next()) {
@@ -174,13 +174,13 @@ public class ClienteDao {
          preparedStatement.setString(2, clienteDo.getApellido1());
          preparedStatement.setString(3, clienteDo.getApellido2());
          preparedStatement.setString(4, clienteDo.getDireccion());
-         preparedStatement.setInt(5, clienteDo.getTelefono());
+         preparedStatement.setLong(5, clienteDo.getTelefono());
          preparedStatement.setString(6, clienteDo.getEmail());
          preparedStatement.setString(7, clienteDo.getEstadoCivil());
          preparedStatement.setFloat(8, clienteDo.getIngresos());
          preparedStatement.setString(9, clienteDo.getEmpresa());
          preparedStatement.setInt(10, clienteDo.getPuntosDataCredito());
-         preparedStatement.setInt(11, clienteDo.getCedula());
+         preparedStatement.setLong(11, clienteDo.getCedula());
          
          preparedStatement.executeUpdate();
          preparedStatement.close();
@@ -214,7 +214,7 @@ public class ClienteDao {
         }
     }
 
-    public void updateFechaLlamar(int cedula, Date time, String hora) {
+    public void updateFechaLlamar(long cedula, Date time, String hora) {
         try {          
          String sql = "UPDATE CLIENTE SET fecha_llamar = ?, hora_llamar = ?  WHERE  cedula = ?";
          PreparedStatement preparedStatement = connection.prepareStatement(sql);   
@@ -224,7 +224,7 @@ public class ClienteDao {
          
          preparedStatement.setString(1, fechaLlamar);
          preparedStatement.setString(2, hora);
-         preparedStatement.setInt(3, cedula);
+         preparedStatement.setLong(3, cedula);
          
          preparedStatement.executeUpdate();
          preparedStatement.close();

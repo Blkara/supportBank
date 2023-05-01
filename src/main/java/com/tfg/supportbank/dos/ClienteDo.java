@@ -6,12 +6,12 @@ import java.util.Date;
 public class ClienteDo {
     
   int idCliente;
-  int cedula;
+  long cedula;
   String nombre;
   String apellido1;
   String apellido2;
   String direccion;
-  float telefono;
+  long telefono;
   String email;
   String estadoCivil;
   float ingresos;
@@ -31,11 +31,11 @@ public class ClienteDo {
         this.idCliente = idCliente;
     }
 
-    public int getCedula() {
+    public long getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
@@ -71,11 +71,11 @@ public class ClienteDo {
         this.direccion = direccion;
     }
 
-    public float getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(float telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

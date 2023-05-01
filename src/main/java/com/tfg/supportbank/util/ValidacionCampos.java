@@ -66,6 +66,22 @@ public class ValidacionCampos {
         }
     }
     
+    public long validarCamposFormLong(JTextField campo, List<JTextField> listCamposNotNull) {
+        if (null != campo && !campo.getText().isEmpty()) {
+            boolean isNum = isNum(campo.getText().trim());
+            if (isNum){
+                return  Long.valueOf(campo.getText().trim());
+            } else {
+                JOptionPane.showMessageDialog(null, campo.getText().trim()+" debe ser numerico, no puede contener '.' o ','");
+                listCamposNotNull.add(campo);
+                return 0; 
+            }           
+        } else {
+            listCamposNotNull.add(campo);
+            return 0;
+        }
+    }
+    
     /**
      * date1.compareTo(date2)
      * @param fechaComparar date1

@@ -424,9 +424,9 @@ public class FormModificar extends javax.swing.JFrame {
             clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
             clienteDo.setApellido1(validacion.validarCamposFormString(apellido,listCamposNotNull));
             clienteDo.setApellido2(null != segundoapellido ? segundoapellido.getText(): "");
-            clienteDo.setCedula(validacion.validarCamposFormInteger(cedula,listCamposNotNull));
+            clienteDo.setCedula(validacion.validarCamposFormLong(cedula,listCamposNotNull));
             clienteDo.setDireccion(validacion.validarCamposFormString(direccion, listCamposNotNull));
-            clienteDo.setTelefono(validacion.validarCamposFloat(telefono,listCamposNotNull));
+            clienteDo.setTelefono(validacion.validarCamposFormLong(telefono,listCamposNotNull));
             clienteDo.setEstadoCivil(estadocivil.getSelectedItem().toString());
             clienteDo.setEmail(validacion.validarEmail(correo,listCamposNotNull) ? correo.getText().trim() : "");
             clienteDo.setIngresos(validacion.validarCamposFormFloat(ingresos,listCamposNotNull));
