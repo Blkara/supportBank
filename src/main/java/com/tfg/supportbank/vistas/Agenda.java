@@ -1,32 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import com.tfg.supportbank.util.StylesForm;
+import com.tfg.supportbank.util.ValidacionCampos;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
-/**
- *
- * @author Kara
- */
 public class Agenda extends javax.swing.JFrame {
+    
+    private static final String TEXT_HORA = "HH:MM 24 horas";
+    private static final String TEXT_CEDULA = "Cedula";
+    ValidacionCampos validacion;
+    StylesForm styleForm;
 
     /**
      * Creates new form Agenda
      */
     public Agenda() {
         initComponents();
+        validacion = new ValidacionCampos();
+        styleForm = new StylesForm();
+        styleForm.addPlaceHolderStyle(horaLlamar);
     }
 
     /**
@@ -51,7 +56,15 @@ public class Agenda extends javax.swing.JFrame {
 
         horaLlamar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         horaLlamar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        horaLlamar.setText("HH:MM:SS hora llamar");
+        horaLlamar.setText("HH:MM 24 horas");
+        horaLlamar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                horaLlamarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                horaLlamarFocusLost(evt);
+            }
+        });
         horaLlamar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 horaLlamarActionPerformed(evt);
@@ -69,7 +82,20 @@ public class Agenda extends javax.swing.JFrame {
 
         lblCedulaCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCedulaCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        lblCedulaCliente.setText("Ingresar Documento");
+        lblCedulaCliente.setText("Cedula");
+        lblCedulaCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lblCedulaClienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lblCedulaClienteFocusLost(evt);
+            }
+        });
+        lblCedulaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblCedulaClienteActionPerformed(evt);
+            }
+        });
 
         cliente.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -136,77 +162,123 @@ public class Agenda extends javax.swing.JFrame {
     }//GEN-LAST:event_horaLlamarActionPerformed
 
     private void btnAgendarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarLlamadaActionPerformed
-        // TODO comprobar cedula
-        if (null != lblCedulaCliente && !lblCedulaCliente.getText().isEmpty()){
+        List<JTextField> listCamposNotNull = new ArrayList<>();
+        // comprobar cedula
+        int cedula = validacion.validarCamposFormInteger(lblCedulaCliente, listCamposNotNull);
+        if (0 != cedula){
             //TODO  comprobar que la fecha sea hay fecha seleccionada
-            if (null != fechaLLamar && null != fechaLLamar.getDate())
-            // TODO comprobar formato horaLLamar
-            if (null != horaLlamar && !horaLlamar.getText().isEmpty()){
-                String horaLLamar = horaLlamar.getText();
-                Pattern p = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
-                Matcher matcher = p.matcher(horaLLamar); 
-                boolean formatoFechaOk = matcher.matches(); 
-                
-                if (formatoFechaOk){
-                    // TODO buscar cliente0
-                    ClienteDao clienteDao = new ClienteDao();
-                    Integer ced = Integer.valueOf(lblCedulaCliente.getText());
-                    ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
-                    if (null != clienteDo){
-                        // TODO agregar hora a la horaLLamar
-                        
-                        
-                        //String myDateString = "13:24:40"; //La hora con forma de String
+            if (null != fechaLLamar && null != fechaLLamar.getDate()){
+                //Comprobar que la fecha es mayor de la fecha actual
+                if (validacion.validarCampoFecha(fechaLLamar.getDate(), new Date()) > 0){                    
+                    // TODO comprobar formato horaLLamar
+                    if (null != horaLlamar && !horaLlamar.getText().isEmpty()){
+                        String horaLLamar = horaLlamar.getText();
+                        Pattern p = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
+                        Matcher matcher = p.matcher(horaLLamar); 
+                        boolean formatoFechaOk = matcher.matches(); 
 
-                        //Creamos la hora con formato del api Java
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                        Date date;
-                        try {
-                            date = sdf.parse(horaLLamar);
-                            
-                            JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
-                            
-                            
-                            
-                            Calendar horallamada = Calendar.getInstance();
-                            horallamada.setTime(date);
-                            int minutos = horallamada.get(Calendar.MINUTE);
-                            int hora = horallamada.get(Calendar.HOUR);
-                            
-                            
-                            
-                        
-                            //lo que más quieras sumar
-                           // Date fechaSalida = calendar.getTime(); //Y ya tienes la horaLLamar sumada.
-                           /* Calendar llamarCalendar = fechaLLamar.getCalendar();
-                            llamarCalendar.set(Calendar.HOUR_OF_DAY, hora);
-                            llamarCalendar.set(Calendar.MINUTE, minutos);*/
-                            
-                           /* JOptionPane.showMessageDialog(null, "fecha calendar: " + llamarCalendar.getTime());
-                            JOptionPane.showMessageDialog(null, "fecha calendar long: " + new  java.sql.Date (llamarCalendar.getTime().getTime()));*/
-                            //JOptionPane.showMessageDialog(null, "fecha llamada: " + fechaSalida.toString());                            
-                            //clienteDo.setFechaLlamar(llamarCalendar.getTime());
-                            
-                            clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(null, "Error en el parseo de hora");
-                        }                    
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El cliente indicado no existe");
-                    }
-                }  else{//else de hora
-                    JOptionPane.showMessageDialog(null, "Debe introducir una hora con formato HH:MM 24 horas");
+                        if (formatoFechaOk){
+                            // TODO buscar cliente0
+                            ClienteDao clienteDao = new ClienteDao();
+                            Integer ced = Integer.valueOf(lblCedulaCliente.getText());
+                            ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
+                            if (null != clienteDo){
+                                // TODO agregar hora a la horaLLamar
+
+
+                                //String myDateString = "13:24:40"; //La hora con forma de String
+
+                                //Creamos la hora con formato del api Java
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                                Date date;
+                                try {
+                                    date = sdf.parse(horaLLamar);
+
+                                    JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
+
+
+
+                                    Calendar horallamada = Calendar.getInstance();
+                                    horallamada.setTime(date);
+                                    int minutos = horallamada.get(Calendar.MINUTE);
+                                    int hora = horallamada.get(Calendar.HOUR);
+
+
+
+
+                                    //lo que más quieras sumar
+                                   // Date fechaSalida = calendar.getTime(); //Y ya tienes la horaLLamar sumada.
+                                   /* Calendar llamarCalendar = fechaLLamar.getCalendar();
+                                    llamarCalendar.set(Calendar.HOUR_OF_DAY, hora);
+                                    llamarCalendar.set(Calendar.MINUTE, minutos);*/
+
+                                   /* JOptionPane.showMessageDialog(null, "fecha calendar: " + llamarCalendar.getTime());
+                                    JOptionPane.showMessageDialog(null, "fecha calendar long: " + new  java.sql.Date (llamarCalendar.getTime().getTime()));*/
+                                    //JOptionPane.showMessageDialog(null, "fecha llamada: " + fechaSalida.toString());                            
+                                    //clienteDo.setFechaLlamar(llamarCalendar.getTime());
+
+                                    clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
+                                } catch (ParseException ex) {
+                                    Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
+                                    JOptionPane.showMessageDialog(null, "Error en el parseo de hora");
+                                }                    
+                            } else {
+                                JOptionPane.showMessageDialog(null, "El cliente indicado no existe");
+                            }
+                        }  else{//else de hora
+                            JOptionPane.showMessageDialog(null, "Debe introducir una hora con formato HH:MM 24 horas");
+                        }
+                    } else { //si no introduce hora
+                        JOptionPane.showMessageDialog(null, "Debe introducir una hora, HH:MM 24 horas");
+                    } 
+                } else {// else de si la fecha es mayor a la actual
+                    JOptionPane.showMessageDialog(null, "La fecha debe ser posterior a la actual");
                 }
-            } else { //si no introduce hora
-                JOptionPane.showMessageDialog(null, "Debe introducir una hora, HH:MM 24 horas");
-            }          
+            } else { // fin si fecha llamar tiene informacion
+                JOptionPane.showMessageDialog(null, "Debe introducir una fecha");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");
+            JOptionPane.showMessageDialog(null, "Debe introducir un número de cedula correcto");
         }
         
         
     }//GEN-LAST:event_btnAgendarLlamadaActionPerformed
+
+    private void horaLlamarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_horaLlamarFocusGained
+        
+        if (horaLlamar.getText().equalsIgnoreCase(TEXT_HORA)){
+            horaLlamar.setText(null);
+            horaLlamar.requestFocus();
+            styleForm.removePlaceHolderStyle(horaLlamar);
+        }
+    }//GEN-LAST:event_horaLlamarFocusGained
+
+
+    private void horaLlamarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_horaLlamarFocusLost
+        if(0 == horaLlamar.getText().length()){
+            styleForm.addPlaceHolderStyle(horaLlamar);
+            horaLlamar.setText(TEXT_HORA);
+        }
+    }//GEN-LAST:event_horaLlamarFocusLost
+
+    private void lblCedulaClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblCedulaClienteFocusGained
+        if (lblCedulaCliente.getText().equalsIgnoreCase(TEXT_CEDULA)){
+            lblCedulaCliente.setText(null);
+            lblCedulaCliente.requestFocus();
+            styleForm.removePlaceHolderStyle(lblCedulaCliente);
+        }
+    }//GEN-LAST:event_lblCedulaClienteFocusGained
+
+    private void lblCedulaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblCedulaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblCedulaClienteActionPerformed
+
+    private void lblCedulaClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblCedulaClienteFocusLost
+       if(0 == lblCedulaCliente.getText().length()){
+            styleForm.addPlaceHolderStyle(lblCedulaCliente);
+            lblCedulaCliente.setText(TEXT_CEDULA);
+        }
+    }//GEN-LAST:event_lblCedulaClienteFocusLost
 
     /**
      * @param args the command line arguments

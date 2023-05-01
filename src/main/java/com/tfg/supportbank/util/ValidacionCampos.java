@@ -71,7 +71,7 @@ public class ValidacionCampos {
      * @param fechaComparar date1
      * @param fechaQueComparar date2
      * @return  fechaComparar MENOR fechaQueComparar, devuelve un valor menor que 0
-     *          fechaQueComparar MAYOR fechaComparar, devuelve un valor mayor que 0
+     *          fechaComparar MAYOR fechaQueComparar    , devuelve un valor mayor que 0
      *          fechaComparar = fechaQueComparar, se mostrará un 0
      */
     public int validarCampoFecha (Date fechaComparar, Date fechaQueComparar){
