@@ -153,8 +153,8 @@ public class MenuCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClienteActionPerformed
-        // TODO add your handling code here:
-        
+        VerCliente ventanaVerCliente = new VerCliente();
+        ventanaVerCliente.setVisible(true);
     }//GEN-LAST:event_btnVerClienteActionPerformed
 
     private void btnCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearClienteActionPerformed
