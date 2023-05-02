@@ -19,9 +19,6 @@ public class AsesorDao {
         conex = new ConnectionSqlBdPfgBanco();
         Connection conexionSql = conex.conectar();
         connection = conex.getConnection();
-        probarConexionSql();
-           /*ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
-    Connection conexionSql = sqlConnection.conectar();*/
     }
 
     public AsesorDo findByUserAndPass(String user, String passSha) {

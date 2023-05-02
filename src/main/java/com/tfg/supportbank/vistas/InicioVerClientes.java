@@ -158,7 +158,6 @@ public class InicioVerClientes extends javax.swing.JFrame {
     private void mostrarClientes(){
         DefaultTableModel tClientes = new DefaultTableModel();
         String datos[] = new String [5];
-        //setNombre  setApellido1 setApellido2 setTelefono
         tClientes.addColumn("Nombre");
         tClientes.addColumn("Apellido");
         tClientes.addColumn(" ");

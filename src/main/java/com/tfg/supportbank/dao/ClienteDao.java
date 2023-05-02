@@ -26,9 +26,6 @@ public class ClienteDao {
         conex = new ConnectionSqlBdPfgBanco();
         Connection conexionSql = conex.conectar();
         connection = conex.getConnection();
-        //probarConexionSql();
-           /*ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
-    Connection conexionSql = sqlConnection.conectar();*/
     }
     
     public List<ClienteDo> findAllClientes() {
@@ -67,7 +64,6 @@ public class ClienteDao {
         
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaEntradaEmpresa = formatoFecha.format(clienteDo.getFechaEntradaEmpresa());
-        //String fechaLlamar = formatoFecha.format(clienteDo.getFechaLlamar());
         
         try{
             
@@ -87,10 +83,7 @@ public class ClienteDao {
             guardar.setString(12, clienteDo.getRefPersonal());
             guardar.setString(13, fechaEntradaEmpresa);
             guardar.setInt(14, clienteDo.getPuntosDataCredito());
-            //guardar.setString(15, fechaLlamar);
-            guardar.setInt(15, Integer.valueOf(clienteDo.getIdAsesor()));
-           // guardar.setDate(12, "DATE '"+clienteDo.getFechaLlamar()+"'");
-            
+            guardar.setInt(15, Integer.valueOf(clienteDo.getIdAsesor()));           
             
             guardar.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
@@ -145,7 +138,7 @@ public class ClienteDao {
          while (rs.next()) {
           clienteDo = new ClienteDo();
           clientetoDo(clienteDo, rs);    
-          JOptionPane.showMessageDialog(null, "Cliente encontrado");
+          //JOptionPane.showMessageDialog(null, "Cliente encontrado");
          }
          rs.close();
          buscar.close();
@@ -233,10 +226,11 @@ public class ClienteDao {
          preparedStatement.executeUpdate();
          preparedStatement.close();
          conex.desconectar();
+         JOptionPane.showMessageDialog(null, "Fecha y hora de llamar a cliente agendada");
 
         } catch (SQLException e) {
-         System.out.println(e.getMessage());
-         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
 
         }

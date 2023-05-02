@@ -166,11 +166,11 @@ public class Agenda extends javax.swing.JFrame {
         // comprobar cedula
         int cedula = validacion.validarCamposFormInteger(lblCedulaCliente, listCamposNotNull);
         if (0 != cedula){
-            //TODO  comprobar que la fecha sea hay fecha seleccionada
+            // comprobar que la fecha sea hay fecha seleccionada
             if (null != fechaLLamar && null != fechaLLamar.getDate()){
                 //Comprobar que la fecha es mayor de la fecha actual
                 if (validacion.validarCampoFecha(fechaLLamar.getDate(), new Date()) > 0){                    
-                    // TODO comprobar formato horaLLamar
+                    // comprobar formato horaLLamar
                     if (null != horaLlamar && !horaLlamar.getText().isEmpty()){
                         String horaLLamar = horaLlamar.getText();
                         Pattern p = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
@@ -178,44 +178,21 @@ public class Agenda extends javax.swing.JFrame {
                         boolean formatoFechaOk = matcher.matches(); 
 
                         if (formatoFechaOk){
-                            // TODO buscar cliente0
+                            // buscar cliente
                             ClienteDao clienteDao = new ClienteDao();
                             Integer ced = Integer.valueOf(lblCedulaCliente.getText());
                             ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
                             if (null != clienteDo){
-                                // TODO agregar hora a la horaLLamar
-
-
-                                //String myDateString = "13:24:40"; //La hora con forma de String
-
                                 //Creamos la hora con formato del api Java
                                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                                 Date date;
                                 try {
                                     date = sdf.parse(horaLLamar);
-
-                                    JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
-
-
-
+                                    //JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
                                     Calendar horallamada = Calendar.getInstance();
                                     horallamada.setTime(date);
                                     int minutos = horallamada.get(Calendar.MINUTE);
                                     int hora = horallamada.get(Calendar.HOUR);
-
-
-
-
-                                    //lo que más quieras sumar
-                                   // Date fechaSalida = calendar.getTime(); //Y ya tienes la horaLLamar sumada.
-                                   /* Calendar llamarCalendar = fechaLLamar.getCalendar();
-                                    llamarCalendar.set(Calendar.HOUR_OF_DAY, hora);
-                                    llamarCalendar.set(Calendar.MINUTE, minutos);*/
-
-                                   /* JOptionPane.showMessageDialog(null, "fecha calendar: " + llamarCalendar.getTime());
-                                    JOptionPane.showMessageDialog(null, "fecha calendar long: " + new  java.sql.Date (llamarCalendar.getTime().getTime()));*/
-                                    //JOptionPane.showMessageDialog(null, "fecha llamada: " + fechaSalida.toString());                            
-                                    //clienteDo.setFechaLlamar(llamarCalendar.getTime());
 
                                     clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
                                 } catch (ParseException ex) {
