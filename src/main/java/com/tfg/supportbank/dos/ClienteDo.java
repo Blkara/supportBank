@@ -21,6 +21,7 @@ public class ClienteDo {
   Date fechaEntradaEmpresa;
   Integer puntosDataCredito;
   Date fechaLlamar;
+  String horaLlamar;
   int idAsesor;
 
     public int getIdCliente() {
@@ -158,7 +159,15 @@ public class ClienteDo {
     public void setIdAsesor(int idAsesor) {
         this.idAsesor = idAsesor;
     }
+
+    public String getHoraLlamar() {
+        return horaLlamar;
+    }
+
+    public void setHoraLlamar(String horaLlamar) {
+        this.horaLlamar = horaLlamar;
+    }
   
-  
+    
     
 }

@@ -8,10 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteDao {
@@ -119,6 +122,7 @@ public class ClienteDao {
         clienteDo.setPuntosDataCredito(rs.getInt("puntos_data_credito"));
         clienteDo.setFechaLlamar(rs.getDate("fecha_llamar"));
         clienteDo.setIdAsesor(rs.getInt("idAsesor"));
+        clienteDo.setHoraLlamar(rs.getString("hora_llamar"));
     }
     
     public void probarConexionSql(){
@@ -236,6 +240,38 @@ public class ClienteDao {
            JOptionPane.ERROR_MESSAGE);
 
         }
+    }
+    
+    public List<ClienteDo> findByFechallamar(Date hoy){
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fecLlamar = formatoFecha.format(hoy);
+        
+        String sql= "SELECT * FROM CLIENTE WHERE fecha_llamar = ?";
+        ClienteDo clienteDo = null;
+        List<ClienteDo> listaClientes = new ArrayList();
+        try {    
+         PreparedStatement buscar = connection.prepareStatement(sql);            
+         buscar.setString(1, fecLlamar);
+         
+         ResultSet rs = buscar.executeQuery();
+         while (rs.next()) {
+          clienteDo = new ClienteDo();
+          clientetoDo(clienteDo, rs);    
+          listaClientes.add(clienteDo); 
+         }
+         rs.close();
+         buscar.close();
+         conex.desconectar();
+         
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+        }
+        return listaClientes;
+        
     }
 
  

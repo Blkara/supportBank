@@ -7,6 +7,7 @@ import com.tfg.supportbank.dos.AsesorDo;
 import com.tfg.supportbank.dos.ClienteDo;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -15,15 +16,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class InicioVerClientes extends javax.swing.JFrame {
     
-    /*ConnectionSqlBdPfgBanco sqlConnection = new ConnectionSqlBdPfgBanco();
-    Connection conexionSql = sqlConnection.conectar();*/
-
     /**
      * Creates new form VerCliente
      */
     public InicioVerClientes() {
         initComponents();
-        //probarConexionSql();
         mostrarClientes();
         probarLogin();
     }
@@ -160,11 +157,12 @@ public class InicioVerClientes extends javax.swing.JFrame {
     
     private void mostrarClientes(){
         DefaultTableModel tClientes = new DefaultTableModel();
-        String datos[] = new String [4];
+        String datos[] = new String [5];
         //setNombre  setApellido1 setApellido2 setTelefono
         tClientes.addColumn("Nombre");
         tClientes.addColumn("Apellido");
         tClientes.addColumn(" ");
+        tClientes.addColumn("Hora");
         tClientes.addColumn("Telefono");
         
         tablaClientesLlamar.setModel(tClientes);
@@ -174,13 +172,15 @@ public class InicioVerClientes extends javax.swing.JFrame {
     
     private void setRowsDatos(String[] datos, DefaultTableModel tClientes) {
         ClienteDao clienteDao = new ClienteDao();
-        List<ClienteDo> clientes = clienteDao.findAllClientes();
+        //List<ClienteDo> clientes = clienteDao.findAllClientes();
+        List<ClienteDo> clientes = clienteDao.findByFechallamar(new Date());
         
         for (ClienteDo cliente: clientes){
             datos[0] = cliente.getNombre();
             datos[1] = cliente.getApellido1();
             datos[2] = cliente.getApellido2();
-            datos[3] = String.valueOf(cliente.getTelefono()); 
+            datos[3] = cliente.getHoraLlamar(); 
+            datos[4] = String.valueOf(cliente.getTelefono()); 
             tClientes.addRow(datos);
         }
     }
