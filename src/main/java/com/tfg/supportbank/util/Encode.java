@@ -19,7 +19,7 @@ public class Encode {
             for (int i = 0; i < result.length; i++) {
                 sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
             }
-            JOptionPane.showMessageDialog(null, "pass sha2 + salt user: : " + salt+ " pass: " + sb.toString());
+            //JOptionPane.showMessageDialog(null, "pass sha2 + salt user: : " + salt+ " pass: " + sb.toString());
             return sb.toString();
             
         } catch (NoSuchAlgorithmException e) {

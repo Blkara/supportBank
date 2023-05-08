@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.AsesorDao;
@@ -9,10 +5,6 @@ import com.tfg.supportbank.dos.AsesorDo;
 import com.tfg.supportbank.util.Encode;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Kara
- */
 public class LoginFormAux extends javax.swing.JFrame {
 
     /**
@@ -91,7 +83,9 @@ public class LoginFormAux extends javax.swing.JFrame {
             AsesorDo asesorDo = asesorDao.findByUserAndPass(user, passSha);
             
             if (null != asesorDo){
-                 JOptionPane.showMessageDialog(null, "Login correcto");
+                JOptionPane.showMessageDialog(null, "Login correcto");
+                InicioVerClientes iniClientes = new InicioVerClientes();
+                iniClientes.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Login Incorrecto");
             }

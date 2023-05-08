@@ -35,7 +35,7 @@ public class VerCliente extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel6.setBackground(new java.awt.Color(0, 51, 102));
 
