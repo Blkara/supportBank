@@ -55,6 +55,11 @@ public class VerCliente extends javax.swing.JFrame {
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton6.setText("< Regresar");
         jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setBackground(new java.awt.Color(0, 0, 153));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -143,6 +148,11 @@ public class VerCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");
         }
     }//GEN-LAST:event_btnFormVerClienteActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
