@@ -22,7 +22,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
     public InicioVerClientes() {
         initComponents();
         mostrarClientes();
-        probarLogin();
+        //probarLogin();
     }
 
     /**
