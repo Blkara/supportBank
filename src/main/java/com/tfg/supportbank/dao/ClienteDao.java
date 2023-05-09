@@ -116,6 +116,7 @@ public class ClienteDao {
         clienteDo.setFechaLlamar(rs.getDate("fecha_llamar"));
         clienteDo.setIdAsesor(rs.getInt("idAsesor"));
         clienteDo.setHoraLlamar(rs.getString("hora_llamar"));
+        clienteDo.setHabilitado(rs.getBoolean("habilitado"));
     }
     
     public void probarConexionSql(){
