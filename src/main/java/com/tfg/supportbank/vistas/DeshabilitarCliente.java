@@ -136,8 +136,8 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
             Integer ced = Integer.valueOf(lblCedulaClienteDeshabilitar.getText());
             ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
             if (null != clienteDo){
-                String sqlDelete = "DELETE FROM cliente WHERE cedula = ?";
-                clienteDao.eliminarCliente(sqlDelete,lblCedulaClienteDeshabilitar.getText());
+                //String sqlDelete = "DELETE FROM cliente WHERE cedula = ?";
+                clienteDao.deshabilitarCliente(lblCedulaClienteDeshabilitar.getText());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");

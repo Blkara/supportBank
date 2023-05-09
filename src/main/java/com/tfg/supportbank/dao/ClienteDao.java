@@ -193,20 +193,24 @@ public class ClienteDao {
         }
     }    
 
-    public void eliminarCliente(String sql, String cedula) {
+    public void deshabilitarCliente(String cedula) {
         try {          
-         PreparedStatement eliminar = connection.prepareStatement(sql);    
+         String sql =  "UPDATE CLIENTE SET " 
+        + " habilitado = false "
+        + " WHERE cedula = ?"
+        ; 
+         PreparedStatement deshabilitar = connection.prepareStatement(sql);    
          
-         eliminar.setString(1, cedula);
+         deshabilitar.setString(1, cedula);
        
-         eliminar.executeUpdate();         
-         eliminar.close();
+         deshabilitar.executeUpdate();         
+         deshabilitar.close();
          conex.desconectar();
-         JOptionPane.showMessageDialog(null, "Cliente Elimiado");
+         JOptionPane.showMessageDialog(null, "Cliente Deshabilitado");
 
         } catch (SQLException e) {
          System.out.println(e.getMessage());
-         JOptionPane.showMessageDialog(null, "Error al eliminar cliente " + e.getMessage(), "Error",
+         JOptionPane.showMessageDialog(null, "Error al deshabilitar cliente " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
 
         }

@@ -531,7 +531,7 @@ public class CrearCliente extends javax.swing.JFrame {
             clienteDo.setRefPersonal(referenciapersonal.getText());
             clienteDo.setFechaEntradaEmpresa(fecha  );
             clienteDo.setPuntosDataCredito(validacion.validarCamposFormInteger(puntosDataCredito,listCamposNotNull));
-            clienteDo.setHabilitado(false);
+            clienteDo.setHabilitado(true);
             
             if ((null != fecha) && (validacion.validarCampoFecha(fecha, new Date()) < 0)){
                 clienteDo.setFechaEntradaEmpresa(fecEntradaEmpresa.getDate());
