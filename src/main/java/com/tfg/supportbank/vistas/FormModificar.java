@@ -438,7 +438,7 @@ public class FormModificar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe rellenar los campos Not Null"  );
             Color color=new Color(255,191,170);            
             listCamposNotNull.stream().forEach(elem -> {
-                elem.setForeground(color);
+                elem.setForeground(Color.BLUE);
                 elem.setBackground(color);                    
                     });
             return null;
