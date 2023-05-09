@@ -138,6 +138,7 @@ public class FormModificar extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Segundo apellido:");
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 153));
