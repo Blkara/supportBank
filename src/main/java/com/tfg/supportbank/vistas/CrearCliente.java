@@ -2,8 +2,10 @@ package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import com.tfg.supportbank.util.StylesForm;
 import com.tfg.supportbank.util.ValidacionCampos;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,12 +21,14 @@ import javax.swing.JTextField;
 public class CrearCliente extends javax.swing.JFrame {
     
     Color color=new Color(255,191,170); 
+    StylesForm estiloFormulario;
 
     /**
      * Creates new form CrearCliente
      */
     public CrearCliente() {
         initComponents();
+        estiloFormulario = new StylesForm();
     }
 
     /**
@@ -408,8 +412,13 @@ public class CrearCliente extends javax.swing.JFrame {
             ClienteDo cliente = clienteDao.findClienteByCedula(valorCedula);
             if (null == cliente){
                 ClienteDo clienteDo = toClienteDo();
+                Integer insert = null;
                 if (null != clienteDo)
-                    clienteDao.addCliente(clienteDo);                
+                    insert = clienteDao.addCliente(clienteDo);  
+                if (null != insert){
+                    JOptionPane.showMessageDialog(null,"resul: " +  insert);
+                     limpiarCamposFormulario();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Ya existe el cliente con numero de cedula: " + cedula.getText());
             }
@@ -420,6 +429,23 @@ public class CrearCliente extends javax.swing.JFrame {
                
         }
     }//GEN-LAST:event_btnCrearClienteActionPerformed
+
+    private void limpiarCamposFormulario() {
+        estiloFormulario.limpiarCampo(nombre);
+        estiloFormulario.limpiarCampo(apellido);
+        estiloFormulario.limpiarCampo(segundoapellido);
+        estiloFormulario.limpiarCampo(direccion);
+        estiloFormulario.limpiarCampo(cedula);
+        estiloFormulario.limpiarCampo(telefono);
+        estiloFormulario.limpiarCampo(correo);
+        estiloFormulario.limpiarCampo(ingresos);
+        estiloFormulario.limpiarCampo(puntosDataCredito);
+        estiloFormulario.limpiarCampo(empresa);
+        estiloFormulario.limpiarCampo(referenciafamiliar);
+        estiloFormulario.limpiarCampo(referenciapersonal);
+        estadocivil.setSelectedItem("");
+        fecEntradaEmpresa.setDate(new Date());
+    }
 
     private void apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoActionPerformed
         // TODO add your handling code here:
@@ -515,6 +541,8 @@ public class CrearCliente extends javax.swing.JFrame {
             Date fechaEntradaEmpresa = null;
             
             Date fecha = fecEntradaEmpresa.getDate();
+            
+            //JOptionPane.showMessageDialog(null, BigDecimal.valueOf(Long.valueOf(ingresos.getText().trim())));
             
             
             clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
