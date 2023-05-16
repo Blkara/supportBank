@@ -1,23 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Kara
- */
-public class DeshabilitarCliente extends javax.swing.JFrame {
+public class HabilitarCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form DeshabilitarCliente
      */
-    public DeshabilitarCliente() {
+    public HabilitarCliente() {
         initComponents();
     }
 
@@ -33,7 +25,7 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblCedulaClienteDeshabilitar = new javax.swing.JTextField();
-        btnFormDeshabilitarCliente = new javax.swing.JButton();
+        btnFormHabCliente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -45,12 +37,12 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cedula:");
 
-        btnFormDeshabilitarCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnFormDeshabilitarCliente.setText("DESHABILITAR");
-        btnFormDeshabilitarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnFormDeshabilitarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnFormHabCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFormHabCliente.setText("HABILITAR");
+        btnFormHabCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnFormHabCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFormDeshabilitarClienteActionPerformed(evt);
+                btnFormHabClienteActionPerformed(evt);
             }
         });
 
@@ -67,7 +59,7 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DESHABILITAR CLIENTE");
+        jLabel3.setText("HABILITAR CLIENTE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,7 +73,7 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(598, 598, 598)
-                        .addComponent(btnFormDeshabilitarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFormHabCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -102,7 +94,7 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnFormDeshabilitarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFormHabCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
@@ -129,23 +121,23 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFormDeshabilitarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormDeshabilitarClienteActionPerformed
+    private void btnFormHabClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormHabClienteActionPerformed
         
         if (null != lblCedulaClienteDeshabilitar && !lblCedulaClienteDeshabilitar.getText().isEmpty()){           
             ClienteDao clienteDao = new ClienteDao();
             Integer ced = Integer.valueOf(lblCedulaClienteDeshabilitar.getText());
             ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
-            if (null != clienteDo){
-                if (clienteDo.isHabilitado()){
-                    clienteDao.deshabilitarCliente(lblCedulaClienteDeshabilitar.getText());
+            if (null != clienteDo ) {
+                if (!clienteDo.isHabilitado()){                
+                    clienteDao.habilitarCliente(lblCedulaClienteDeshabilitar.getText());
                 } else {
-                    JOptionPane.showMessageDialog(null, "El cliente debe estar habilitado para ser deshabilitado");
+                    JOptionPane.showMessageDialog(null, "Este cliente no esta deshabilitado");
                 }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe introducir un número de Cédula");
         }
-    }//GEN-LAST:event_btnFormDeshabilitarClienteActionPerformed
+    }//GEN-LAST:event_btnFormHabClienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
@@ -169,26 +161,27 @@ public class DeshabilitarCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeshabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeshabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeshabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeshabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabilitarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeshabilitarCliente().setVisible(true);
+                new HabilitarCliente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFormDeshabilitarCliente;
+    private javax.swing.JButton btnFormHabCliente;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
