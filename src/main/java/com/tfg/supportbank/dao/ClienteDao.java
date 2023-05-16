@@ -3,6 +3,7 @@ package com.tfg.supportbank.dao;
 
 import com.tfg.supportbank.connection.sql.ConnectionSqlBdPfgBanco;
 import com.tfg.supportbank.dos.ClienteDo;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,8 +54,9 @@ public class ClienteDao {
         return listaClientes;
     }
     
-    public void addCliente (ClienteDo clienteDo){
+    public Integer addCliente (ClienteDo clienteDo){
         
+        Integer result = null;
         String sql = "INSERT INTO CLIENTE(" +
                     " cedula,nombre,apellido1,apellido2,direccion,telefono,email,"
                     + "estado_civil,ingresos,empresa,ref_familiar,ref_personal,fecha_entrada_empresa,"
@@ -77,7 +79,8 @@ public class ClienteDao {
             guardar.setLong(6, clienteDo.getTelefono());
             guardar.setString(7, clienteDo.getEmail());
             guardar.setString(8, clienteDo.getEstadoCivil());
-            guardar.setFloat(9, clienteDo.getIngresos());
+            //Bigdecinal Redondea el valor del ingreso a decimal mas cercano
+            guardar.setBigDecimal(9, BigDecimal.valueOf(clienteDo.getIngresos()));
             guardar.setString(10, clienteDo.getEmpresa());
             guardar.setString(11, clienteDo.getReFamiliar());
             guardar.setString(12, clienteDo.getRefPersonal());
@@ -85,16 +88,19 @@ public class ClienteDao {
             guardar.setInt(14, clienteDo.getPuntosDataCredito());
             guardar.setInt(15, Integer.valueOf(clienteDo.getIdAsesor()));           
             
-            guardar.executeUpdate();
+            result = guardar.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
             guardar.close();
             conex.desconectar();
+            
             
         } catch (SQLException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al agregar cliente " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
         }
+        
+        return result;
     }
 
     private void clientetoDo(ClienteDo clienteDo, ResultSet rs) throws SQLException {

@@ -19,4 +19,8 @@ public class StylesForm {
         textField.setFont(font);
         textField.setForeground(Color.black);  
     }
+
+    public void limpiarCampo(JTextField campo) {
+        campo.setText("");
+    }
 }

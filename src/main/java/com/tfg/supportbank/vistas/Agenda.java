@@ -49,6 +49,7 @@ public class Agenda extends javax.swing.JFrame {
         btnAgendarLlamada = new javax.swing.JButton();
         lblCedulaCliente = new javax.swing.JTextField();
         cliente = new javax.swing.JTextField();
+        JbtnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,6 +103,15 @@ public class Agenda extends javax.swing.JFrame {
         cliente.setText("DESHABILITAR CLIENTE");
         cliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        JbtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JbtnRegresar.setText("< Regresar");
+        JbtnRegresar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JbtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbtnRegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,11 +125,13 @@ public class Agenda extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(horaLlamar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                             .addComponent(lblCedulaCliente)
-                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74)
+                        .addComponent(JbtnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(393, 393, 393)
                         .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +145,9 @@ public class Agenda extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(horaLlamar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110)
-                        .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JbtnRegresar)))
                     .addComponent(fechaLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
@@ -257,6 +271,11 @@ public class Agenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblCedulaClienteFocusLost
 
+    private void JbtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnRegresarActionPerformed
+        this.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_JbtnRegresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,6 +312,7 @@ public class Agenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JbtnRegresar;
     private javax.swing.JButton btnAgendarLlamada;
     private javax.swing.JTextField cliente;
     private com.toedter.calendar.JCalendar fechaLLamar;

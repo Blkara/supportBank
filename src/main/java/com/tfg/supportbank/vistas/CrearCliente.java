@@ -2,8 +2,10 @@ package com.tfg.supportbank.vistas;
 
 import com.tfg.supportbank.dao.ClienteDao;
 import com.tfg.supportbank.dos.ClienteDo;
+import com.tfg.supportbank.util.StylesForm;
 import com.tfg.supportbank.util.ValidacionCampos;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,12 +21,14 @@ import javax.swing.JTextField;
 public class CrearCliente extends javax.swing.JFrame {
     
     Color color=new Color(255,191,170); 
+    StylesForm estiloFormulario;
 
     /**
      * Creates new form CrearCliente
      */
     public CrearCliente() {
         initComponents();
+        estiloFormulario = new StylesForm();
     }
 
     /**
@@ -71,6 +75,7 @@ public class CrearCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        JbtnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -209,14 +214,27 @@ public class CrearCliente extends javax.swing.JFrame {
         jButton4.setText("Adjuntar Documento");
         jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        JbtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        JbtnRegresar.setText("< Regresar");
+        JbtnRegresar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JbtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbtnRegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,9 +280,11 @@ public class CrearCliente extends javax.swing.JFrame {
                                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(5, 5, 5)))))
                         .addGap(118, 118, 118)
-                        .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JbtnRegresar))
                         .addGap(40, 40, 40))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,10 +300,6 @@ public class CrearCliente extends javax.swing.JFrame {
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(332, 332, 332))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +371,8 @@ public class CrearCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(referenciapersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(JbtnRegresar))
                 .addGap(27, 27, 27))
         );
 
@@ -408,8 +425,13 @@ public class CrearCliente extends javax.swing.JFrame {
             ClienteDo cliente = clienteDao.findClienteByCedula(valorCedula);
             if (null == cliente){
                 ClienteDo clienteDo = toClienteDo();
+                Integer insert = null;
                 if (null != clienteDo)
-                    clienteDao.addCliente(clienteDo);                
+                    insert = clienteDao.addCliente(clienteDo);  
+                if (null != insert){
+                    JOptionPane.showMessageDialog(null,"resul: " +  insert);
+                     limpiarCamposFormulario();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Ya existe el cliente con numero de cedula: " + cedula.getText());
             }
@@ -420,6 +442,23 @@ public class CrearCliente extends javax.swing.JFrame {
                
         }
     }//GEN-LAST:event_btnCrearClienteActionPerformed
+
+    private void limpiarCamposFormulario() {
+        estiloFormulario.limpiarCampo(nombre);
+        estiloFormulario.limpiarCampo(apellido);
+        estiloFormulario.limpiarCampo(segundoapellido);
+        estiloFormulario.limpiarCampo(direccion);
+        estiloFormulario.limpiarCampo(cedula);
+        estiloFormulario.limpiarCampo(telefono);
+        estiloFormulario.limpiarCampo(correo);
+        estiloFormulario.limpiarCampo(ingresos);
+        estiloFormulario.limpiarCampo(puntosDataCredito);
+        estiloFormulario.limpiarCampo(empresa);
+        estiloFormulario.limpiarCampo(referenciafamiliar);
+        estiloFormulario.limpiarCampo(referenciapersonal);
+        estadocivil.setSelectedItem("");
+        fecEntradaEmpresa.setDate(new Date());
+    }
 
     private void apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoActionPerformed
         // TODO add your handling code here:
@@ -432,6 +471,11 @@ public class CrearCliente extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void JbtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnRegresarActionPerformed
+        this.setVisible(false);
+        dispose();
+    }//GEN-LAST:event_JbtnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,6 +513,7 @@ public class CrearCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JbtnRegresar;
     private javax.swing.JTextField apellido;
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JTextField cedula;
@@ -515,6 +560,8 @@ public class CrearCliente extends javax.swing.JFrame {
             Date fechaEntradaEmpresa = null;
             
             Date fecha = fecEntradaEmpresa.getDate();
+            
+            //JOptionPane.showMessageDialog(null, BigDecimal.valueOf(Long.valueOf(ingresos.getText().trim())));
             
             
             clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
