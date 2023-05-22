@@ -81,24 +81,27 @@ public class VerFormCliente extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nombre: *");
+        jLabel1.setText("Nombre: ");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Primer apellido: *");
+        jLabel2.setText("Primer apellido: ");
 
+        nombre.setEnabled(false);
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
             }
         });
 
+        apellido.setEnabled(false);
         apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apellidoActionPerformed(evt);
             }
         });
 
+        cedula.setEnabled(false);
         cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedulaActionPerformed(evt);
@@ -107,28 +110,35 @@ public class VerFormCliente extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Cedula: *");
+        jLabel3.setText("Cedula: ");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Direccion: *");
+        jLabel4.setText("Direccion: ");
+
+        direccion.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Telefono: *");
+        jLabel5.setText("Telefono: ");
+
+        telefono.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Correo: *");
+        jLabel6.setText("Correo: ");
+
+        correo.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Estado Civil: *");
+        jLabel7.setText("Estado Civil: ");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ingresos: *");
+        jLabel8.setText("Ingresos: ");
 
+        ingresos.setEnabled(false);
         ingresos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresosActionPerformed(evt);
@@ -137,16 +147,21 @@ public class VerFormCliente extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Empresa: *");
+        jLabel9.setText("Empresa: ");
+
+        empresa.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Referencia Familiar:");
 
+        referenciafamiliar.setEnabled(false);
+
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Referencia Personal:");
 
+        referenciapersonal.setEnabled(false);
         referenciapersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 referenciapersonalActionPerformed(evt);
@@ -157,6 +172,8 @@ public class VerFormCliente extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Segundo apellido:");
+
+        segundoapellido.setEnabled(false);
 
         jLabel13.setBackground(new java.awt.Color(0, 0, 153));
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -173,18 +190,21 @@ public class VerFormCliente extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Puntos data credito:");
 
+        fecEntradaEmpresa.setEnabled(false);
         fecEntradaEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fecEntradaEmpresaActionPerformed(evt);
             }
         });
 
+        puntosDataCredito.setEnabled(false);
         puntosDataCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 puntosDataCreditoActionPerformed(evt);
             }
         });
 
+        habilitado.setEnabled(false);
         habilitado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 habilitadoActionPerformed(evt);
@@ -204,6 +224,7 @@ public class VerFormCliente extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("habilitado:");
 
+        estadoCivil1.setEnabled(false);
         estadoCivil1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estadoCivil1ActionPerformed(evt);
@@ -510,7 +531,7 @@ public class VerFormCliente extends javax.swing.JFrame {
         referenciafamiliar.setText(clienteDo.getReFamiliar());
         fecEntradaEmpresa.setText(fechaEntradaEmp);
         habilitado.setText(Boolean.toString(clienteDo.isHabilitado()));
-    
+        estadoCivil1.setText(clienteDo.getEstadoCivil());
     
     }
 }
