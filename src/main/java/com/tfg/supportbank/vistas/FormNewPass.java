@@ -5,13 +5,20 @@ import com.tfg.supportbank.dos.AsesorDo;
 import com.tfg.supportbank.util.Encode;
 import javax.swing.JOptionPane;
 
-public class LoginFormAux extends javax.swing.JFrame {
+public class FormNewPass extends javax.swing.JFrame {
+
+    private String user;
 
     /**
      * Creates new form LoginFormAux
      */
-    public LoginFormAux() {
+    public FormNewPass() {
         initComponents();
+    }
+
+    FormNewPass(String user) {
+        initComponents();
+        this.user = user;
     }
 
     /**
@@ -26,10 +33,9 @@ public class LoginFormAux extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
-        btnLogin = new javax.swing.JButton();
-        password = new javax.swing.JPasswordField();
-        btnRecPass = new javax.swing.JButton();
+        btnCambiarPass = new javax.swing.JButton();
+        newPass2 = new javax.swing.JPasswordField();
+        newPass1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,33 +44,25 @@ public class LoginFormAux extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Usuario :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 130, 30));
+        jLabel1.setText("Nueva contraseña:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 220, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Contraseña : ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 210, -1));
+        jLabel2.setText("Repita la nueva contraseña:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, -1, -1));
 
-        btnLogin.setText("LOGIN");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiarPass.setText("Cambiar");
+        btnCambiarPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnCambiarPassActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, 140, -1));
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 210, -1));
+        jPanel1.add(btnCambiarPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, 140, -1));
+        jPanel1.add(newPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 210, -1));
+        jPanel1.add(newPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 200, -1));
 
-        btnRecPass.setText("Recuperar Contraseña");
-        btnRecPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecPassActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRecPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 220, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login1.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login2.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 612));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,37 +79,33 @@ public class LoginFormAux extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-                try{
-            String user = username.getText();
-            String pass = password.getText();
+    private void btnCambiarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassActionPerformed
             
-           String passSha = Encode.sha2(pass, user);
-            
-            AsesorDao asesorDao = new AsesorDao();
-            AsesorDo asesorDo = asesorDao.findByUserAndPass(user, passSha);
-            
-            if (null != asesorDo){
-                JOptionPane.showMessageDialog(null, "Login correcto");
-                InicioVerClientes iniClientes = new InicioVerClientes();
-                iniClientes.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Login Incorrecto");
-            }
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
+        String pass1 = newPass1.getText();
+        String pass2 = newPass2.getText();
 
-    private void btnRecPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecPassActionPerformed
-        if (null != username.getText() && !username.getText().isEmpty()) {
-        RecuperacionPass ventanaRecuperarPass = new RecuperacionPass(username.getText());
-         ventanaRecuperarPass.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,"Debe introducir un usuario");
+        //Comprobar que la contraseña escrita es la misma en el formulario
+        if (pass1.equals(pass2)){
+
+            String passSha = Encode.sha2(pass2, user);
+            try{
+                AsesorDao asesorDao = new AsesorDao();
+                AsesorDo asesorDo = asesorDao.findByUser(user);
+                asesorDao.updatePass(asesorDo.getCedula(), passSha);
+
+
+                JOptionPane.showMessageDialog(null, "cambio de contraseña correcto, inicie sesión");
+                LoginFormAux ventanaLoginFor = new LoginFormAux();
+                ventanaLoginFor.setVisible(true);
+                //se cierra la ventana
+                this.dispose();
+
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }                
         }
-    }//GEN-LAST:event_btnRecPassActionPerformed
+            
+    }//GEN-LAST:event_btnCambiarPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,32 +124,32 @@ public class LoginFormAux extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFormAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNewPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFormAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNewPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFormAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNewPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFormAux.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormNewPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginFormAux().setVisible(true);
+                new FormNewPass().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnRecPass;
+    private javax.swing.JButton btnCambiarPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField password;
-    private javax.swing.JTextField username;
+    private javax.swing.JPasswordField newPass1;
+    private javax.swing.JPasswordField newPass2;
     // End of variables declaration//GEN-END:variables
 }

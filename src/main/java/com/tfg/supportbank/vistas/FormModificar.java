@@ -452,9 +452,7 @@ public class FormModificar extends javax.swing.JFrame {
        // try {
             
             Date fechaEntradaEmpresa = null;
-            
-            //Date fecha = fecEntradaEmpresa.getDate();
-            //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");            
+                     
             clienteDo.setNombre(validacion.validarCamposFormString(nombre,listCamposNotNull));
             clienteDo.setApellido1(validacion.validarCamposFormString(apellido,listCamposNotNull));
             clienteDo.setApellido2(null != segundoapellido ? segundoapellido.getText(): "");
@@ -491,5 +489,6 @@ public class FormModificar extends javax.swing.JFrame {
         empresa.setText(clienteDo.getEmpresa());
         correo.setText(clienteDo.getEmail());
         puntosDatacredito.setText(String.valueOf(clienteDo.getPuntosDataCredito()));
+        //habilitado.setText(String.valueOf(clienteDo.isHabilitado()));
     }
 }
