@@ -64,7 +64,7 @@ public class LoginFormAux extends javax.swing.JFrame {
         });
         jPanel1.add(btnRecPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 220, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login1.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Login3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 612));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
