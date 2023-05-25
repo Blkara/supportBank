@@ -122,8 +122,7 @@ public class ClienteDao {
         clienteDo.setFechaLlamar(rs.getDate("fecha_llamar"));
         clienteDo.setIdAsesor(rs.getInt("idAsesor"));
         clienteDo.setHoraLlamar(rs.getString("hora_llamar"));
-        
-        JOptionPane.showMessageDialog(null,rs.getBigDecimal("ingresos"));
+        clienteDo.setHabilitado(rs.getBoolean("habilitado"));
     }
     
     public void probarConexionSql(){
@@ -146,7 +145,32 @@ public class ClienteDao {
          while (rs.next()) {
           clienteDo = new ClienteDo();
           clientetoDo(clienteDo, rs);    
-          //JOptionPane.showMessageDialog(null, "Cliente encontrado");
+         }
+         rs.close();
+         buscar.close();
+         conex.desconectar();
+         
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al buscar clientes " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
+        return clienteDo;
+    }
+    
+    public ClienteDo findClienteByCedulaAndHabilitado(long cedula) {
+        String sql = "SELECT * FROM CLIENTE WHERE cedula = ? AND habilitado = true";
+        ClienteDo clienteDo = null;
+        try {          
+         PreparedStatement buscar = connection.prepareStatement(sql);            
+         buscar.setLong(1, cedula);
+         
+         ResultSet rs = buscar.executeQuery();
+         while (rs.next()) {
+          clienteDo = new ClienteDo();
+          clientetoDo(clienteDo, rs);    
          }
          rs.close();
          buscar.close();
@@ -200,20 +224,24 @@ public class ClienteDao {
         }
     }    
 
-    public void eliminarCliente(String sql, String cedula) {
+    public void deshabilitarCliente(String cedula) {
         try {          
-         PreparedStatement eliminar = connection.prepareStatement(sql);    
+         String sql =  "UPDATE CLIENTE SET " 
+        + " habilitado = false "
+        + " WHERE cedula = ?"
+        ; 
+         PreparedStatement deshabilitar = connection.prepareStatement(sql);    
          
-         eliminar.setString(1, cedula);
+         deshabilitar.setString(1, cedula);
        
-         eliminar.executeUpdate();         
-         eliminar.close();
+         deshabilitar.executeUpdate();         
+         deshabilitar.close();
          conex.desconectar();
-         JOptionPane.showMessageDialog(null, "Cliente Elimiado");
+         JOptionPane.showMessageDialog(null, "Cliente Deshabilitado");
 
         } catch (SQLException e) {
          System.out.println(e.getMessage());
-         JOptionPane.showMessageDialog(null, "Error al eliminar cliente " + e.getMessage(), "Error",
+         JOptionPane.showMessageDialog(null, "Error al deshabilitar cliente " + e.getMessage(), "Error",
            JOptionPane.ERROR_MESSAGE);
 
         }
@@ -249,7 +277,7 @@ public class ClienteDao {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fecLlamar = formatoFecha.format(hoy);
         
-        String sql= "SELECT * FROM CLIENTE WHERE fecha_llamar = ?";
+        String sql= "SELECT * FROM CLIENTE WHERE fecha_llamar = ? AND habilitado = true";
         ClienteDo clienteDo = null;
         List<ClienteDo> listaClientes = new ArrayList();
         try {    
@@ -274,6 +302,29 @@ public class ClienteDao {
         }
         return listaClientes;
         
+    }
+
+    public void habilitarCliente(String cedula) {
+        try {          
+         String sql =  "UPDATE CLIENTE SET " 
+        + " habilitado = true "
+        + " WHERE cedula = ?"
+        ; 
+         PreparedStatement habilitar = connection.prepareStatement(sql);    
+         
+         habilitar.setString(1, cedula);
+       
+         habilitar.executeUpdate();         
+         habilitar.close();
+         conex.desconectar();
+         JOptionPane.showMessageDialog(null, "Cliente Habilitado");
+
+        } catch (SQLException e) {
+         System.out.println(e.getMessage());
+         JOptionPane.showMessageDialog(null, "Error al habilitar cliente " + e.getMessage(), "Error",
+           JOptionPane.ERROR_MESSAGE);
+
+        }
     }
 
  

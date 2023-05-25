@@ -7,6 +7,8 @@ public class AsesorDo {
     private String nombre;
     private String usuario;
     private String password;
+    private String pregunta;
+    private String respuesta;
 
     public int getIdAsesor() {
         return idAsesor;
@@ -47,7 +49,20 @@ public class AsesorDo {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
 }

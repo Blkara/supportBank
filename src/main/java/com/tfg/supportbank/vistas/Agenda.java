@@ -197,22 +197,26 @@ public class Agenda extends javax.swing.JFrame {
                             Integer ced = Integer.valueOf(lblCedulaCliente.getText());
                             ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
                             if (null != clienteDo){
-                                //Creamos la hora con formato del api Java
-                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                                Date date;
-                                try {
-                                    date = sdf.parse(horaLLamar);
-                                    //JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
-                                    Calendar horallamada = Calendar.getInstance();
-                                    horallamada.setTime(date);
-                                    int minutos = horallamada.get(Calendar.MINUTE);
-                                    int hora = horallamada.get(Calendar.HOUR);
+                                if (clienteDo.isHabilitado()){
+                                    //Creamos la hora con formato del api Java
+                                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                                    Date date;
+                                    try {
+                                        date = sdf.parse(horaLLamar);
+                                        //JOptionPane.showMessageDialog(null, "hora llamada: " + date.toString());
+                                        Calendar horallamada = Calendar.getInstance();
+                                        horallamada.setTime(date);
+                                        int minutos = horallamada.get(Calendar.MINUTE);
+                                        int hora = horallamada.get(Calendar.HOUR);
 
-                                    clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
-                                } catch (ParseException ex) {
-                                    Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
-                                    JOptionPane.showMessageDialog(null, "Error en el parseo de hora");
-                                }                    
+                                        clienteDao.updateFechaLlamar(clienteDo.getCedula(),fechaLLamar.getDate(), horaLLamar);
+                                    } catch (ParseException ex) {
+                                        Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
+                                        JOptionPane.showMessageDialog(null, "Error en el parseo de hora");
+                                    } 
+                                } else { // else cliente no habilitado
+                                    JOptionPane.showMessageDialog(null, "El cliente no esta habilitado");
+                                }
                             } else {
                                 JOptionPane.showMessageDialog(null, "El cliente indicado no existe");
                             }

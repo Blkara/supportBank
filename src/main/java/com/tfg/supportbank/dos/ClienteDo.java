@@ -23,6 +23,7 @@ public class ClienteDo {
   Date fechaLlamar;
   String horaLlamar;
   int idAsesor;
+  boolean habilitado;
 
     public int getIdCliente() {
         return idCliente;
@@ -166,6 +167,14 @@ public class ClienteDo {
 
     public void setHoraLlamar(String horaLlamar) {
         this.horaLlamar = horaLlamar;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
   
     
