@@ -89,7 +89,7 @@ public class RecuperacionPass extends javax.swing.JFrame {
         TxtPregunta.setEnabled(false);
         jPanel1.add(TxtPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 210, 30));
 
-        jLblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login2.png"))); // NOI18N
+        jLblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Login3.png"))); // NOI18N
         jLblFondo.setText("jLabel1");
         jPanel1.add(jLblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 995, 609));
 
@@ -119,6 +119,7 @@ public class RecuperacionPass extends javax.swing.JFrame {
         if (TxtRespuesta.getText().equals(userRespuesta)){
             FormNewPass ventanaFormNewPass = new FormNewPass(user);
             ventanaFormNewPass.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null,"Respuesta incorrecta");
             //Se cierra la ventana

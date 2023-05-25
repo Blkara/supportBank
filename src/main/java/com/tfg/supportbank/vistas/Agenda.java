@@ -48,12 +48,14 @@ public class Agenda extends javax.swing.JFrame {
         horaLlamar = new javax.swing.JTextField();
         btnAgendarLlamada = new javax.swing.JButton();
         lblCedulaCliente = new javax.swing.JTextField();
-        cliente = new javax.swing.JTextField();
         JbtnRegresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 53, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(fechaLLamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 164, 251, 258));
 
         horaLlamar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         horaLlamar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -71,6 +73,7 @@ public class Agenda extends javax.swing.JFrame {
                 horaLlamarActionPerformed(evt);
             }
         });
+        jPanel1.add(horaLlamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, 175, 36));
 
         btnAgendarLlamada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAgendarLlamada.setText("Agregar Evento");
@@ -80,6 +83,7 @@ public class Agenda extends javax.swing.JFrame {
                 btnAgendarLlamadaActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAgendarLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 171, 46));
 
         lblCedulaCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCedulaCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -97,11 +101,7 @@ public class Agenda extends javax.swing.JFrame {
                 lblCedulaClienteActionPerformed(evt);
             }
         });
-
-        cliente.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cliente.setText("DESHABILITAR CLIENTE");
-        cliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(lblCedulaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 175, 36));
 
         JbtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JbtnRegresar.setText("< Regresar");
@@ -111,55 +111,18 @@ public class Agenda extends javax.swing.JFrame {
                 JbtnRegresarActionPerformed(evt);
             }
         });
+        jPanel1.add(JbtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 400, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(fechaLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(horaLlamar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(lblCedulaCliente)
-                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(74, 74, 74)
-                        .addComponent(JbtnRegresar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(393, 393, 393)
-                        .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(horaLlamar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgendarLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JbtnRegresar)))
-                    .addComponent(fechaLLamar, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agenda.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +157,7 @@ public class Agenda extends javax.swing.JFrame {
                         if (formatoFechaOk){
                             // buscar cliente
                             ClienteDao clienteDao = new ClienteDao();
-                            Integer ced = Integer.valueOf(lblCedulaCliente.getText());
+                            Integer ced = Integer.valueOf(lblCedulaCliente.getText().trim());
                             ClienteDo clienteDo = clienteDao.findClienteByCedula(ced);
                             if (null != clienteDo){
                                 if (clienteDo.isHabilitado()){
@@ -318,9 +281,9 @@ public class Agenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbtnRegresar;
     private javax.swing.JButton btnAgendarLlamada;
-    private javax.swing.JTextField cliente;
     private com.toedter.calendar.JCalendar fechaLLamar;
     private javax.swing.JTextField horaLlamar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lblCedulaCliente;
     // End of variables declaration//GEN-END:variables

@@ -62,7 +62,7 @@ public class FormNewPass extends javax.swing.JFrame {
         jPanel1.add(newPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 210, -1));
         jPanel1.add(newPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 200, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login2.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Login3.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 612));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,6 +103,8 @@ public class FormNewPass extends javax.swing.JFrame {
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
             }                
+        } else {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
         }
             
     }//GEN-LAST:event_btnCambiarPassActionPerformed

@@ -35,24 +35,19 @@ public class MenuCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cliente = new javax.swing.JTextField();
         btnVerCliente = new javax.swing.JButton();
         btnCrearCliente = new javax.swing.JButton();
         btnModificarCliente = new javax.swing.JButton();
         btnDeshabilitar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnAgenda = new javax.swing.JButton();
         JbtnRegresar = new javax.swing.JButton();
         btnDeshabilitar1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
-
-        cliente.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cliente.setText("CLIENTE");
-        cliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnVerCliente.setText("VER");
         btnVerCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -61,6 +56,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnVerClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnVerCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 110, -1));
 
         btnCrearCliente.setText("CREAR");
         btnCrearCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -69,6 +65,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnCrearClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCrearCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 110, -1));
 
         btnModificarCliente.setText("MODIFICAR");
         btnModificarCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -77,6 +74,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnModificarClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnModificarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 110, -1));
 
         btnDeshabilitar.setText("DESHABILITAR");
         btnDeshabilitar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -85,9 +83,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnDeshabilitarActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kara_\\Desktop\\cliente0.png")); // NOI18N
-        jLabel1.setText("jLabel1");
+        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 110, -1));
 
         btnAgenda.setText("AGENDA");
         btnAgenda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -96,6 +92,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnAgendaActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 110, -1));
 
         JbtnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JbtnRegresar.setText("< Regresar");
@@ -105,6 +102,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 JbtnRegresarActionPerformed(evt);
             }
         });
+        jPanel1.add(JbtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, 103, -1));
 
         btnDeshabilitar1.setText("HABILITAR");
         btnDeshabilitar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -113,57 +111,10 @@ public class MenuCliente extends javax.swing.JFrame {
                 btnDeshabilitar1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btnDeshabilitar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 110, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(321, 321, 321))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(JbtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDeshabilitar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnVerCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCrearCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDeshabilitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(120, 120, 120)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, Short.MAX_VALUE)
-                .addGap(118, 118, 118))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnAgenda)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnVerCliente)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnCrearCliente)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnModificarCliente)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnDeshabilitar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDeshabilitar1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
-                .addComponent(JbtnRegresar)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menu.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -257,8 +208,7 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnDeshabilitar1;
     private javax.swing.JButton btnModificarCliente;
     private javax.swing.JButton btnVerCliente;
-    private javax.swing.JTextField cliente;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
