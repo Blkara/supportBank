@@ -39,6 +39,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientesLlamar = new javax.swing.JTable();
         btnMenuClientes = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado Clientes");
@@ -46,11 +47,13 @@ public class InicioVerClientes extends javax.swing.JFrame {
         panelIniVerCliente.setBackground(new java.awt.Color(0, 51, 102));
         panelIniVerCliente.setForeground(new java.awt.Color(0, 0, 153));
         panelIniVerCliente.setToolTipText("");
+        panelIniVerCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblListadoClientes.setBackground(new java.awt.Color(0, 0, 153));
         lblListadoClientes.setForeground(new java.awt.Color(255, 255, 255));
         lblListadoClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblListadoClientes.setText("LISTADO DE CLIENTES A LLAMAR");
+        panelIniVerCliente.add(lblListadoClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 262, 31));
 
         tablaClientesLlamar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,6 +65,8 @@ public class InicioVerClientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaClientesLlamar);
 
+        panelIniVerCliente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 173, 387, 228));
+
         btnMenuClientes.setText("VER CLINTES");
         btnMenuClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMenuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -69,42 +74,16 @@ public class InicioVerClientes extends javax.swing.JFrame {
                 btnMenuClientesActionPerformed(evt);
             }
         });
+        panelIniVerCliente.add(btnMenuClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 122, -1));
 
-        javax.swing.GroupLayout panelIniVerClienteLayout = new javax.swing.GroupLayout(panelIniVerCliente);
-        panelIniVerCliente.setLayout(panelIniVerClienteLayout);
-        panelIniVerClienteLayout.setHorizontalGroup(
-            panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIniVerClienteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMenuClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
-            .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                .addGroup(panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(207, Short.MAX_VALUE))
-        );
-        panelIniVerClienteLayout.setVerticalGroup(
-            panelIniVerClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIniVerClienteLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(lblListadoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnMenuClientes)
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/listado de cliente (1).png"))); // NOI18N
+        panelIniVerCliente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelIniVerCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelIniVerCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 998, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,6 +206,7 @@ public class InicioVerClientes extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenuClientes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblListadoClientes;
     private javax.swing.JPanel panelIniVerCliente;
